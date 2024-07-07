@@ -21907,7 +21907,7 @@ textarea.e-filled.e-disabled.e-input::-webkit-input-placeholder {
       width: 12px;
       z-index: 10;
       cursor: -webkit-grab;
-      cursor: grab; }
+          }
       .e-control-wrapper.e-slider-container .e-slider .e-handle.e-handle-active {
         cursor: -webkit-grabbing;
         cursor: grabbing; }
