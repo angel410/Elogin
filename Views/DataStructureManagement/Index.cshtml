@@ -1,0 +1,908 @@
+﻿@{
+    ViewData["Title"] = "Data Structure Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    List<object> filterColumns = new List<object>();
+    filterColumns.Add(new { field = "entityId", matchCase = false, @operator = "equal", predicate = "and", value = "nonexistingentity" });
+    List<object> filterbyEntityCategoryId = new List<object>();
+    filterbyEntityCategoryId.Add(new { field = "entityCategoryId", matchCase = false, @operator = "equal", predicate = "and", value = "nonexistingentity" });
+    List<object> filterbyId = new List<object>();
+    filterbyId.Add(new { field = "id", matchCase = false, @operator = "equal", predicate = "and", value = "nonexistingentity" });
+}
+
+<ejs-toast id="toast" showCloseButton="true" showProgressBar="true" timeOut="3000">
+    <e-toast-position X="Right" Y="Top"></e-toast-position>
+</ejs-toast>
+
+<h1>Data Structure Management</h1>
+
+<div id="ej2Tab">
+    <div class="e-tab-header">
+        <div>Categories </div>
+        <div>Entities </div>
+        <div>Properties </div>
+    </div>
+    <div class="e-content">
+        <div>
+            <h6 id="CategoriesHeader"></h6>
+            <p>
+                @*<ejs-button id="PerformanceTest" content="Performance Test"></ejs-button>*@
+                
+            </p>
+            <ejs-treegrid id="CategoriesTreeGrid" dataSource="@ViewBag.entityCategoriesDataSource" height="480" idMapping="id" parentIdMapping="parentId"
+                          treeColumnIndex="1" childMapping="true" rowSelected="CategoryRowSelected" rowDeselected="CategoryRowDeselected" allowFiltering="true"
+                          allowRowDragAndDrop="true" actionComplete="CategoriesActionComplete"
+                          toolbar="@(new List<string>() { "Add", "Delete", "Cancel", "Update" })">
+                <e-treegrid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Cell" showDeleteConfirmDialog="true"></e-treegrid-editSettings>
+                <e-treegrid-filtersettings type="Menu"></e-treegrid-filtersettings>
+                <e-treegrid-columns>
+                    <e-treegrid-column field="id" headerText="Id" textAlign="Left" width="0" visible="false" isPrimaryKey="true"></e-treegrid-column>
+                    <e-treegrid-column field="categoryName" headerText="Category Name" textAlign="Left" width="95"></e-treegrid-column>
+                </e-treegrid-columns>
+            </ejs-treegrid>
+        </div>
+        <div>
+
+            <p>
+                <ejs-dropdowntree id="categoriesTDDL" popupHeight="200px" placeholder="Select a category" change="categoriesTDDLvalueChange" changeOnBlur="false" showClearButton="false">
+                    <e-dropdowntree-fields dataSource="ViewBag.categoriesDataSource" value="id" parentValue="parentId" text="categoryName" expanded="expanded" hasChildren="hasChild"></e-dropdowntree-fields>
+                </ejs-dropdowntree>
+            </p>
+            <h6 id="EntitiesHeader" style="color: red">Please select a category</h6>
+            <ejs-treegrid id="EntitiesTreeGrid" dataSource="@ViewBag.entitiesDataSource" height="180"
+                          treeColumnIndex="1" childMapping="false" rowSelected="EntityRowSelected" rowDeselected="EntityRowDeselected" allowFiltering="true"
+                          actionComplete="EntitiesActionComplete"
+                          toolbar="@(new List<string>() { "Add", "Delete", "Cancel", "Update" })">
+                <e-treegrid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Cell" showDeleteConfirmDialog="true"></e-treegrid-editSettings>
+                <e-treegrid-filtersettings columns="filterbyEntityCategoryId" type="Menu"></e-treegrid-filtersettings>
+                <e-treegrid-columns>
+                    <e-treegrid-column field="id" headerText="Id" textAlign="Left" width="0" visible="false"></e-treegrid-column>
+                    <e-treegrid-column field="entityName" headerText="Entity Name" textAlign="Left" width="95"></e-treegrid-column>
+                    <e-treegrid-column field="isRequired" headerText="Is Required" textAlign="Left" width="95" displayAsCheckBox="true" editType="booleanedit"></e-treegrid-column>
+                    <e-treegrid-column field="entityCategoryId" headerText="EntityCategoryId" textAlign="Left" width="0" visible="false"></e-treegrid-column>
+                </e-treegrid-columns>
+            </ejs-treegrid>
+            <div>
+                <br />
+                <h5>Entity Channels</h5>
+                <h6 id="EntityChannelsHeader" style="color: red">Please select an entity</h6>
+                <div>
+
+                    <dl class="row">
+                        <dt class="col-sm-5">
+                            <ejs-treegrid id="UnAssignedChannelsTreeGrid" height="140" treeColumnIndex="1" rowSelected="UnAssignedChannelsRowSelected" rowDeselected="UnAssignedChannelsRowDeselected">
+
+                                <e-treegrid-columns>
+                                    <e-treegrid-column field="id" headerText="Id" textAlign="Left" width="0"></e-treegrid-column>
+                                    <e-treegrid-column field="channel" headerText="Available Channels" textAlign="Left" width="95"></e-treegrid-column>
+
+                                </e-treegrid-columns>
+                            </ejs-treegrid>
+                        </dt>
+                        <dt class="col-sm-2" style="align-self: center; text-align: center;">
+                            <p>
+                                <ejs-button id="AssignSelected" content="Assign Selected >" cssClass="controlbutton"></ejs-button>
+                            </p>
+                            <p>
+                                <ejs-button id="UnassignSelected" content="< Unassign Selected" cssClass="controlbutton"></ejs-button>
+                            </p>
+                            <p>
+                                <ejs-button id="AssignAll" content="Assign All >>" cssClass="controlbutton"></ejs-button>
+                            </p>
+                            <p>
+                                <ejs-button id="UnassignAll" content="<< Unassign All" cssClass="controlbutton"></ejs-button>
+                            </p>
+                        </dt>
+                        <dd class="col-sm-5">
+                            <ejs-treegrid id="AssignedChannelsTreeGrid" height="140" treeColumnIndex="1" rowSelected="AssignedChannelsRowSelected" rowDeselected="AssignedChannelsRowDeselected">
+
+                                <e-treegrid-columns>
+                                    <e-treegrid-column field="id" headerText="Id" textAlign="Left" width="0"></e-treegrid-column>
+                                    <e-treegrid-column field="channel" headerText="Assigned Channels" textAlign="Left" width="95"></e-treegrid-column>
+
+                                </e-treegrid-columns>
+                            </ejs-treegrid>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div>
+
+            <p>
+                <ejs-dropdowntree id="categoriesTDDL2" popupHeight="200px" placeholder="Select a category" change="categoriesTDDLvalueChange2" changeOnBlur="false" showClearButton="false">
+                    <e-dropdowntree-fields dataSource="ViewBag.categoriesDataSource" value="id" parentValue="parentId" text="categoryName" expanded="expanded" hasChildren="hasChild"></e-dropdowntree-fields>
+                </ejs-dropdowntree>
+                <ejs-dropdownlist id="entitiesDDL" popupHeight="200px" placeholder="Select an entity" change="entitiesDDLvalueChange">
+                    <e-dropdownlist-fields value="id" text="entityName"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+            </p>
+            <h6 id="PropertiesHeader" style="color: red">Please select an entity</h6>
+            <ejs-treegrid id="PropertiesTreeGrid" dataSource="@ViewBag.propertiesDataSource" height="180"
+                          treeColumnIndex="1" allowFiltering="true" rowSelected="PropertyRowSelected" rowDeselected="PropertyRowDeselected"
+                          actionComplete="PropertiesActionComplete"
+                          toolbar="@(new List<string>() { "Add", "Delete", "Cancel", "Update" })">
+                <e-treegrid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Cell" showDeleteConfirmDialog="true"></e-treegrid-editSettings>
+                <e-treegrid-filterSettings columns="filterColumns" type="Menu"></e-treegrid-filterSettings>
+                <e-treegrid-columns>
+                    <e-treegrid-column field="id" headerText="Id" textAlign="Left" width="0" visible="false"></e-treegrid-column>
+                    <e-treegrid-column field="propertyName" headerText="Property Name" textAlign="Left" width="95"></e-treegrid-column>
+                    <e-treegrid-column field="validationRegex" headerText="Validation Regex" textAlign="Left" width="95"></e-treegrid-column>
+                    <e-treegrid-column field="validationHint" headerText="Validation Hint" textAlign="Left" width="95"></e-treegrid-column>
+                    <e-treegrid-column field="isEncrypted" headerText="Is Encrypted" textAlign="Left" width="95" displayAsCheckBox="true" editType="booleanedit"></e-treegrid-column>
+                    <e-treegrid-column field="isHashed" headerText="Is Hashed" textAlign="Left" width="95" displayAsCheckBox="true" editType="booleanedit"></e-treegrid-column>
+                    <e-treegrid-column field="isUniqueIdentifier" headerText="Is Unique Identifier" textAlign="Left" width="95" displayAsCheckBox="true" editType="booleanedit"></e-treegrid-column>
+                    <e-treegrid-column field="isRequired" headerText="Is Required" textAlign="Left" width="95" displayAsCheckBox="true" editType="booleanedit"></e-treegrid-column>
+                    <e-treegrid-column field="entityId" headerText="EntityId" textAlign="Left" width="0" visible="false"></e-treegrid-column>
+                </e-treegrid-columns>
+            </ejs-treegrid>
+            <div>
+                <br />
+                <h5>Channel Login Properties</h5>
+                <h6 id="ChannelLoginPropertyHeader" style="color: red">Select a property to add as an identifier for the selected channel from the list below</h6>
+                <div>
+
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            <ejs-treegrid id="LoginPropertyChannelsTreeGrid" height="140" dataSource="@ViewBag.channelDatasource" treeColumnIndex="1" rowSelected="LoginPropertyChannelsRowSelected" rowDeselected="LoginPropertyChannelsRowDeselected">
+                                <e-treegrid-columns>
+                                    <e-treegrid-column field="id" headerText="Id" textAlign="Left" width="0"></e-treegrid-column>
+                                    <e-treegrid-column field="channel" headerText="Identification Channels" textAlign="Left" width="95"></e-treegrid-column>
+                                </e-treegrid-columns>
+                            </ejs-treegrid>
+                        </dt>
+                        <dt class="col-sm-2" style="align-self: center; text-align: center;">
+                            <p>
+                                <ejs-button id="AddLoginProperty" content="Add Identifier" cssClass="controlbutton"></ejs-button>
+                            </p>
+                            <p>
+                                <ejs-button id="RemoveLoginProperty" content="Remove Identifier" cssClass="controlbutton"></ejs-button>
+                            </p>
+                        </dt>
+                        <dd class="col-sm-8">
+                            <ejs-treegrid id="LoginPropertiesTreeGrid" height="140" treeColumnIndex="1" rowSelected="LoginPropertyRowSelected" rowDeselected="LoginPropertyRowDeselected">
+                                <e-treegrid-columns>
+                                    <e-treegrid-column field="id" headerText="Id" textAlign="Left" width="0"></e-treegrid-column>
+                                    <e-treegrid-column field="channelId" headerText="channelid" textAlign="Left" width="0"></e-treegrid-column>
+                                    <e-treegrid-column field="channel" headerText="channel" textAlign="Left" width="0"></e-treegrid-column>
+                                    <e-treegrid-column field="categorgyId" headerText="categorgyid" textAlign="Left" width="0"></e-treegrid-column>
+                                    <e-treegrid-column field="categoryName" headerText="Category" textAlign="Left" width="95"></e-treegrid-column>
+                                    <e-treegrid-column field="entityId" headerText="entityid" textAlign="Left" width="0"></e-treegrid-column>
+                                    <e-treegrid-column field="entityName" headerText="Entity" textAlign="Left" width="95"></e-treegrid-column>
+                                    <e-treegrid-column field="propertyId" headerText="propertyid" textAlign="Left" width="0"></e-treegrid-column>
+                                    <e-treegrid-column field="propertyName" headerText="Property" textAlign="Left" width="95"></e-treegrid-column>
+                                </e-treegrid-columns>
+                            </ejs-treegrid>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        
+        
+       
+    </div>
+</div>
+
+<style>
+    .e-content .e-item {
+        font-size: 12px;
+        padding: 10px;
+        text-align: justify;
+    }
+    .danger {
+        background-color:red;
+        color:white;
+    }
+</style>
+
+
+<script type="text/javascript">
+
+
+    var selectedCategory;
+    var selectedEntity;
+    var selectedProperty;
+    var assignChannel;
+    var unAssignChannel;
+    var selectedCategoryName;
+    var selectedEntityName;
+    var selectedPropertyName;
+    var selectedChannel;
+    var selectedLoginProperty
+    var selectedPropertyUI
+    var selectedCustomer;
+    var selectedInstance;
+    var selectedInstanceName;
+    var selectedDataValueId;
+
+    var tabObj = new ej.navigations.Tab({
+        heightAdjustMode: "auto"
+    });
+    tabObj.appendTo('#ej2Tab');
+
+   
+
+    function categoriesTDDLvalueChange(args) {
+        var categoriesTDDL = document.getElementById("categoriesTDDL").ej2_instances[0];
+        var categoriesTDDL2 = document.getElementById("categoriesTDDL2").ej2_instances[0];
+        var entities = document.getElementById("EntitiesTreeGrid").ej2_instances[0]; CategoriesTreeGrid
+        var CategoriesTreeGrid = document.getElementById("CategoriesTreeGrid").ej2_instances[0];
+
+        //alert(JSON.stringify(entities.dataSource));
+        selectedCategory = categoriesTDDL.value;
+        //var tempQuery = new ej.data.Query().where('EntityCategoryId', 'equal', selectedCategory);
+        entities.removeFilteredColsByField("entityCategoryId");
+        entities.filterByColumn('entityCategoryId', 'equal', selectedCategory);
+        //entities.dataSource = "";
+        entities.refresh();
+        //entities.dataSource.dataBind();
+        //alert(JSON.stringify(entities.dataSource));
+        //alert(args.data.Id);
+        selectedCategoryName = categoriesTDDL.text;
+        document.getElementById("EntitiesHeader").innerHTML = "Showing entities assigned to " + selectedCategoryName;
+        document.getElementById("EntitiesHeader").style.color = "black";
+
+        
+        var EntitiesDDL = document.getElementById("entitiesDDL").ej2_instances[0];
+        var categoryId = categoriesTDDL.value;
+        
+        $.ajax({
+            type: 'POST',
+            url: '../DataStructureManagement/GetEntities',
+            data: { categoryId: categoryId },
+            success: function (result) {
+
+                EntitiesDDL.dataSource = null;
+
+                EntitiesDDL.dataBind();
+
+                EntitiesDDL.dataSource = result;
+
+                EntitiesDDL.dataBind();
+
+
+            }
+        });
+
+
+        categoriesTDDL2.value = categoriesTDDL.value;
+        
+    }
+
+    function categoriesTDDLvalueChange2(args) {
+        var categoriesTDDL = document.getElementById("categoriesTDDL2").ej2_instances[0];
+        var categoriesTDDL2 = document.getElementById("categoriesTDDL").ej2_instances[0];
+        var entities = document.getElementById("EntitiesTreeGrid").ej2_instances[0]; CategoriesTreeGrid
+        var CategoriesTreeGrid = document.getElementById("CategoriesTreeGrid").ej2_instances[0];
+
+        //alert(JSON.stringify(entities.dataSource));
+        selectedCategory = categoriesTDDL.value;
+        //var tempQuery = new ej.data.Query().where('EntityCategoryId', 'equal', selectedCategory);
+        entities.removeFilteredColsByField("entityCategoryId");
+        entities.filterByColumn('entityCategoryId', 'equal', selectedCategory);
+        //entities.dataSource = "";
+        entities.refresh();
+        //entities.dataSource.dataBind();
+        //alert(JSON.stringify(entities.dataSource));
+        //alert(args.data.Id);
+        selectedCategoryName = categoriesTDDL.text;
+        document.getElementById("EntitiesHeader").innerHTML = "Showing entities assigned to " + selectedCategoryName;
+        document.getElementById("EntitiesHeader").style.color = "black";
+
+        
+        var EntitiesDDL = document.getElementById("entitiesDDL").ej2_instances[0];
+        var categoryId = categoriesTDDL.value;
+
+        $.ajax({
+            type: 'POST',
+            url: '../DataStructureManagement/GetEntities',
+            data: { categoryId: categoryId },
+            success: function (result) {
+
+                EntitiesDDL.dataSource = null;
+
+                EntitiesDDL.dataBind();
+
+                EntitiesDDL.dataSource = result;
+
+                EntitiesDDL.dataBind();
+
+
+            }
+        });
+
+        var string_array = [selectedCategory];
+        categoriesTDDL2.value = categoriesTDDL.value;
+
+    }
+
+    function entitiesDDLvalueChange() {
+        var entitiesDDL = document.getElementById("entitiesDDL").ej2_instances[0];
+        var properties = document.getElementById("PropertiesTreeGrid").ej2_instances[0];
+
+
+
+        selectedEntity = entitiesDDL.value;
+        properties.removeFilteredColsByField("entityId");
+        properties.filterByColumn('entityId', 'equal', selectedEntity);
+
+        properties.refresh();
+
+
+        refreshAssignedChannels(selectedEntity);
+        refreshUnAssignedChannels(selectedEntity);
+
+
+        selectedEntityName = entitiesDDL.text;
+        if (selectedEntity) {
+            document.getElementById("PropertiesHeader").innerHTML = "Showing properties assigned to " + selectedCategoryName + " - " + selectedEntityName;
+            document.getElementById("PropertiesHeader").style.color = "black";
+            document.getElementById("EntityChannelsHeader").innerHTML = "Showing channels assigned to " + selectedCategoryName + " - " + selectedEntityName;
+            document.getElementById("EntityChannelsHeader").style.color = "black";
+        }
+        
+
+    }
+    
+    document.getElementById('AssignSelected').onclick = function () {
+             
+
+        if (assignChannel && selectedEntity) {
+            $.ajax({
+                type: 'POST',
+                url: '../DataStructureManagement/AssignChannels',
+                data: { channelid: assignChannel, entityid: selectedEntity },
+                success: function (result) {
+                    refreshAssignedChannels(selectedEntity);
+                    refreshUnAssignedChannels(selectedEntity);
+                    
+                }
+            });
+        }
+    }
+
+    document.getElementById('UnassignSelected').onclick = function () {
+        if (unAssignChannel && selectedEntity) {
+            $.ajax({
+                type: 'POST',
+                url: '../DataStructureManagement/UnAssignChannels',
+                data: { channelid: unAssignChannel, entityid: selectedEntity },
+                success: function (result) {
+                    refreshAssignedChannels(selectedEntity);
+                    refreshUnAssignedChannels(selectedEntity);
+                    
+                }
+            });
+        }
+    }
+    document.getElementById('AssignAll').onclick = function () {
+        if (selectedEntity) {
+            $.ajax({
+                type: 'POST',
+                url: '../DataStructureManagement/AssignAllChannels',
+                data: { entityid: selectedEntity },
+                success: function (result) {
+                    refreshAssignedChannels(selectedEntity);
+                    refreshUnAssignedChannels(selectedEntity);
+                    
+                }
+            });
+        }
+    }
+    document.getElementById('UnassignAll').onclick = function () {
+        if (selectedEntity) {
+            $.ajax({
+                type: 'POST',
+                url: '../DataStructureManagement/UnAssignAllChannels',
+                data: { entityid: selectedEntity },
+                success: function (result) {
+                    refreshAssignedChannels(selectedEntity);
+                    refreshUnAssignedChannels(selectedEntity);
+                    
+                }
+            });
+        }
+    }
+
+    function refreshAssignedChannels(entity) {
+        var assignedChannels = document.getElementById("AssignedChannelsTreeGrid").ej2_instances[0];
+        $.ajax({
+            type: 'POST',
+            url: '../DataStructureManagement/RefreshAssignedChannels/' + entity,
+            data: { datefilter: $("#datefilter").val() },
+            success: function (result) {
+                //alert(JSON.stringify(result));
+                assignedChannels.dataSource = null;
+                assignedChannels.dataSource = result;
+                //alert(JSON.stringify(result));
+            }
+        });
+
+        assignedChannels.refresh();
+    }
+
+    function refreshUnAssignedChannels(entity) {
+        var unAssignedChannels = document.getElementById("UnAssignedChannelsTreeGrid").ej2_instances[0];
+        $.ajax({
+            type: 'POST',
+            url: '../DataStructureManagement/RefreshUnAssignedChannels/' + entity,
+            data: { datefilter: $("#datefilter").val() },
+            success: function (result) {
+                
+                unAssignedChannels.dataSource = null;
+                unAssignedChannels.dataSource = result;
+                
+            }
+        });
+
+        unAssignedChannels.refresh();
+    }
+    
+
+
+    
+    function CategoryRowSelected(args) {
+        var categoriesTDDL = document.getElementById("categoriesTDDL").ej2_instances[0];
+        var entities = document.getElementById("EntitiesTreeGrid").ej2_instances[0];
+        
+        
+
+        //alert(JSON.stringify(entities.dataSource));
+        selectedCategory = args.data.id;
+        //var tempQuery = new ej.data.Query().where('EntityCategoryId', 'equal', selectedCategory);
+        entities.removeFilteredColsByField("entityCategoryId");
+        entities.filterByColumn('entityCategoryId', 'equal', selectedCategory);
+        //entities.dataSource = "";
+        entities.refresh();
+        //entities.dataSource.dataBind();
+        //alert(JSON.stringify(entities.dataSource));
+        //alert(args.data.Id);
+        selectedCategoryName = args.data.categoryName;
+        document.getElementById("EntitiesHeader").innerHTML = "Showing entities assigned to " + selectedCategoryName;
+        document.getElementById("EntitiesHeader").style.color = "black";
+
+        
+        var EntitiesDDL = document.getElementById("entitiesDDL").ej2_instances[0];
+        var categoryId = selectedCategory;
+        var string_array = [categoryId];
+        categoriesTDDL.value = string_array;
+
+        $.ajax({
+            type: 'POST',
+            url: '../CustomerDataManagement/GetEntities',
+            data: { categoryId: categoryId },
+            success: function (result) {
+
+                EntitiesDDL.dataSource = null;
+
+                EntitiesDDL.dataBind();
+
+                EntitiesDDL.dataSource = result;
+
+                EntitiesDDL.dataBind();
+
+
+            }
+        });
+    }
+    function CategoryRowDeselected(args) {
+        var categoriesTDDL = document.getElementById("categoriesTDDL").ej2_instances[0];
+        var entities = document.getElementById("EntitiesTreeGrid").ej2_instances[0];
+        entities.removeFilteredColsByField("entityCategoryId");
+        entities.filterByColumn('entityCategoryId', 'equal', "nonexistingentity");
+        entities.refresh();
+        selectedCategoryName = "";
+        document.getElementById("EntitiesHeader").innerHTML = "Please select a Category";
+        document.getElementById("EntitiesHeader").style.color = "red";
+        categoriesTDDL.refresh();
+    }
+
+    function EntityRowSelected(args) {
+        var properties = document.getElementById("PropertiesTreeGrid").ej2_instances[0];
+        var entitiesDDL = document.getElementById("entitiesDDL").ej2_instances[0];
+
+        
+        selectedEntity = args.data.id;
+        properties.removeFilteredColsByField("entityId");
+        properties.filterByColumn('entityId', 'equal', selectedEntity);
+
+        properties.refresh();
+
+        entitiesDDL.value = selectedEntity;
+
+        
+        refreshAssignedChannels(selectedEntity);
+        refreshUnAssignedChannels(selectedEntity);
+
+
+        selectedEntityName = args.data.entityName;
+        document.getElementById("PropertiesHeader").innerHTML = "Showing properties assigned to " + selectedCategoryName + " - " + selectedEntityName;
+        document.getElementById("PropertiesHeader").style.color = "black";
+        document.getElementById("EntityChannelsHeader").innerHTML = "Showing channels assigned to " + selectedCategoryName + " - " + selectedEntityName;
+        document.getElementById("EntityChannelsHeader").style.color = "black";
+
+        
+
+
+    }
+    function EntityRowDeselected(args) {
+        var properties = document.getElementById("PropertiesTreeGrid").ej2_instances[0];
+        var assignedChannels = document.getElementById("AssignedChannelsTreeGrid").ej2_instances[0];
+        var unAssignedChannels = document.getElementById("UnAssignedChannelsTreeGrid").ej2_instances[0];
+        var entitiesDDL = document.getElementById("entitiesDDL").ej2_instances[0];
+        entitiesDDL.value = null;
+
+        
+        
+
+        properties.removeFilteredColsByField("entityId");
+        properties.filterByColumn('entityId', 'equal', "nonexistingentity");
+        properties.refresh();
+        //assignedChannels.removeFilteredColsByField("entityId");
+        //assignedChannels.filterByColumn('entityId', 'equal', "nonexistingentity");
+        //assignedChannels.refresh();
+        //unAssignedChannels.removeFilteredColsByField("entityId");
+        //unAssignedChannels.filterByColumn('entityId', 'equal', "nonexistingentity");
+        //unAssignedChannels.refresh();
+
+        selectedEntityName = "";
+        document.getElementById("PropertiesHeader").innerHTML = "Please select an entity";
+        document.getElementById("PropertiesHeader").style.color = "red";
+        document.getElementById("EntityChannelsHeader").innerHTML = "Please select an entity";
+        document.getElementById("EntityChannelsHeader").style.color = "red";
+        selectedEntity = "";
+
+        refreshAssignedChannels(selectedEntity);
+        refreshUnAssignedChannels(selectedEntity);
+
+        
+    }
+
+    function PropertyRowSelected(args) {
+
+        selectedProperty = args.data.id;
+        selectedPropertyName = args.data.propertyName;
+        selectedPropertyUI = args.data.isUniqueIdentifier;
+        
+        
+
+        if (args.data.isUniqueIdentifier) {
+            document.getElementById("ChannelLoginPropertyHeader").innerHTML = selectedCategoryName + " - " + selectedEntityName + " - " + selectedPropertyName + " is selected.";
+            document.getElementById("ChannelLoginPropertyHeader").style.color = "black";
+        }
+        else {
+            document.getElementById("ChannelLoginPropertyHeader").innerHTML = selectedCategoryName + " - " + selectedEntityName + " - " + selectedPropertyName + " cannot be used because it is not a unique identifier.";
+            document.getElementById("ChannelLoginPropertyHeader").style.color = "red";
+        }
+        
+
+    }
+    function PropertyRowDeselected(args) {
+        
+        selectedProperty = "";
+        selectedPropertyName = "";
+        selectedPropertyUI = false;
+        document.getElementById("ChannelLoginPropertyHeader").innerHTML = "Select a property to add as an identifier for the selected channel from the list below";
+        document.getElementById("ChannelLoginPropertyHeader").style.color = "red";
+        
+    }
+
+    function AssignedChannelsRowSelected(args) {
+
+
+        unAssignChannel = args.data.id;
+
+
+
+    }
+    function AssignedChannelsRowDeselected(args) {
+
+        unAssignChannel = "";
+    }
+
+    function UnAssignedChannelsRowSelected(args) {
+
+
+        assignChannel = args.data.id;
+
+
+    }
+    function UnAssignedChannelsRowDeselected(args) {
+
+        assignChannel = "";
+    }
+    function LoginPropertyChannelsRowSelected(args) {
+        refreshLoginProperties(args.data.id);
+        selectedChannel = args.data.id;
+    }
+    function LoginPropertyChannelsRowDeselected(args) {
+        var channelLoginProperties = document.getElementById("LoginPropertiesTreeGrid").ej2_instances[0];
+        //channelLoginProperties.removeFilteredColsByField("id");
+        //channelLoginProperties.filterByColumn('id', 'equal', "nonexistingentity");
+        channelLoginProperties.dataSource = "";       
+        channelLoginProperties.refresh();
+
+        channelLoginProperties.refresh();
+        selectedChannel = "";
+    }
+    document.getElementById('AddLoginProperty').onclick = function () {
+        if (selectedChannel && selectedProperty && selectedPropertyUI) {
+            $.ajax({
+                type: 'POST',
+                url: '../DataStructureManagement/AddChannelLoginProperty',
+                data: { propertyid: selectedProperty, channelid: selectedChannel },
+                success: function (result) {
+                    refreshLoginProperties(selectedChannel);
+                }
+            });
+        }
+    }
+    document.getElementById('RemoveLoginProperty').onclick = function () {
+        if (selectedLoginProperty) {
+            $.ajax({
+                type: 'POST',
+                url: '../DataStructureManagement/RemoveChannelLoginProperty',
+                data: { id: selectedLoginProperty},
+                success: function (result) {
+                    refreshLoginProperties(selectedChannel);
+                    
+                }
+            });
+        }
+    }
+    function refreshLoginProperties(channelId) {
+        var channelLoginProperties = document.getElementById("LoginPropertiesTreeGrid").ej2_instances[0];
+        $.ajax({
+            type: 'POST',
+            url: '../DataStructureManagement/GetChannelLoginProperties/' + channelId,
+            data: { datefilter: $("#datefilter").val() },
+            success: function (result) {
+                //alert(JSON.stringify(result));
+                //channelLoginProperties.removeFilteredColsByField("id");
+                channelLoginProperties.dataSource = null;
+                channelLoginProperties.dataSource = result;
+                //alert(JSON.stringify(result));
+                channelLoginProperties.refresh();
+            }
+        });
+    }
+    function LoginPropertyRowSelected(args) {
+        selectedLoginProperty = args.data.id;
+        
+    }
+    function LoginPropertyRowDeselected(args) {
+        selectedLoginProperty = "";
+    }
+
+    
+    
+    
+    //document.getElementById('PerformanceTest').onclick = function () {
+    //    $.ajax({
+    //        type: 'POST',
+    //        url: '../DataStructureManagement/AuditPerformanceTest',
+    //        data: { datefilter: $("#datefilter").val() },
+    //        success: function () {
+
+
+    //        }
+    //    });
+    //}
+
+    
+    function CategoriesActionComplete(args) {
+        var categories = document.getElementById("CategoriesTreeGrid").ej2_instances[0];
+        if (args.type === 'save') {
+            var newName = args.data.categoryName;
+            var categoryId = args.data.id;
+            $.ajax({
+                type: 'POST',
+                url: '../DataStructureManagement/UpdateCategoryName',
+                data: { categoryId: categoryId, newName: newName },
+                success: function (result) {
+                    if (result === "Success") {
+                        categories.dataSource = null;
+                        categories.dataSource = result;
+                    }
+                    else {
+                        categories.dataSource = null;
+                        categories.dataSource = result;
+                    }
+
+                }
+            });
+        }
+        else if (args.type === 'actionComplete')
+        {
+            if (args.requestType === 'save') {
+                var newCategoryName = args.data.categoryName;
+                $.ajax({
+                    type: 'POST',
+                    url: '../DataStructureManagement/CreateCategory',
+                    data: { newCategoryName: newCategoryName },
+                    success: function (result) {
+                        categories.dataSource = null;
+                        categories.dataSource = result;
+                        
+
+                    }
+                });
+            }
+            else if (args.requestType === 'delete') {
+                $.ajax({
+                    type: 'POST',
+                    url: '../DataStructureManagement/DeleteCategory',
+                    data: { Id: selectedCategory },
+                    success: function (result) {
+                        categories.dataSource = null;
+                        categories.dataSource = result;
+
+
+                    }
+                });
+                
+                
+            }
+        }
+        else {
+            var newData = categories.dataSource;
+            $.ajax({
+                type: 'POST',
+                url: '../DataStructureManagement/UpdateCategoryParentId',
+                data: { tree: newData },
+                success: function () {
+
+
+                }
+            });
+        }
+        
+    }
+    function EntitiesActionComplete(args) {
+        //alert("args.type: " + args.type);
+        //alert("args.requestType: " + args.requestType);
+        var entities = document.getElementById("EntitiesTreeGrid").ej2_instances[0];
+        if (args.type === 'save') {
+            var newName = args.data.entityName;
+            var isRequired = args.data.isRequired;
+            var entityId = args.data.id;
+            $.ajax({
+                type: 'POST',
+                url: '../DataStructureManagement/UpdateEntity',
+                data: { entityId: entityId, newName: newName, isRequired: isRequired },
+                success: function (result) {
+                    if (result === "Success") {
+                        entities.dataSource = null;
+                        entities.dataSource = result;
+                    }
+                    else {
+                        entities.dataSource = null;
+                        entities.dataSource = result;
+                    }
+
+                }
+            });
+        }
+        else if (args.type === 'actionComplete') {
+            if (args.requestType === 'save') {
+                var newEntityName = args.data.entityName;
+                $.ajax({
+                    type: 'POST',
+                    url: '../DataStructureManagement/CreateEntity',
+                    data: { newEntityName: newEntityName, entityCategoryId: selectedCategory },
+                    success: function (result) {
+                        entities.dataSource = null;
+                        entities.dataSource = result;
+
+
+                    }
+                });
+            }
+            else if (args.requestType === 'delete') {
+                var entity = args.data[0].id;
+                $.ajax({
+                    type: 'POST',
+                    url: '../DataStructureManagement/DeleteEntity',
+                    data: { id: entity },
+                    success: function (result) {
+                        entities.dataSource = null;
+                        entities.dataSource = result;
+                        
+
+                    }
+                });
+
+            }
+        }
+       
+
+    }
+    function PropertiesActionComplete(args) {
+        var properties = document.getElementById("PropertiesTreeGrid").ej2_instances[0];
+        if (args.type === 'save') {
+            var propertyId = args.data.id;
+            var propertyName = args.data.propertyName;
+            var validationRegex = args.data.validationRegex;
+            var validationHint = args.data.validationHint;
+            var isEncrypted = args.data.isEncrypted;
+            var isHashed = args.data.isHashed;
+            var isUniqueIdentifier = args.data.isUniqueIdentifier;
+            var isRequired = args.data.isRequired;
+            
+            $.ajax({
+                type: 'POST',
+                url: '../DataStructureManagement/UpdateProperty',
+                data: { propertyId: propertyId, propertyName: propertyName, validationRegex: validationRegex, validationHint: validationHint, isEncrypted: isEncrypted, isHashed: isHashed, isUniqueIdentifier: isUniqueIdentifier, isRequired: isRequired },
+                success: function (result) {
+                    if (result === "Success") {
+                        //alert("Value successfully updated in database");
+                        var toast = document.getElementById('toast').ej2_instances[0];
+                        toast.target = document.body;
+                        toast.title = "Success";
+                        toast.content = "Value successfully updated in database";
+                        toast.show();
+                        properties.dataSource = null;
+                        properties.dataSource = result;
+                    }
+                    else {
+                        properties.dataSource = null;
+                        properties.dataSource = result;
+                    }
+                    
+                    
+                }
+            });
+        }
+        else if (args.type === 'actionComplete') {
+            if (args.requestType === 'save') {
+                var propertyName = args.data.propertyName;
+                var validationRegex = args.data.validationRegex;
+                var validationHint = args.data.validationHint;
+                var isEncrypted = args.data.isEncrypted;
+                var isHashed = args.data.isHashed;
+                var isUniqueIdentifier = args.data.isUniqueIdentifier;
+                var entityId = selectedEntity;
+                $.ajax({
+                    type: 'POST',
+                    url: '../DataStructureManagement/CreateProperty',
+                    data: { propertyName: propertyName, validationRegex: validationRegex, validationHint: validationHint, isEncrypted: isEncrypted, isHashed: isHashed, isUniqueIdentifier: isUniqueIdentifier, entityId: entityId },
+                    success: function (result) {
+                        properties.dataSource = null;
+                        properties.dataSource = result;
+
+
+                    }
+                });
+            }
+            else if (args.requestType === 'delete') {
+                var property = args.data[0].id;
+                $.ajax({
+                    type: 'POST',
+                    url: '../DataStructureManagement/DeleteProperty',
+                    data: { Id: property },
+                    success: function (result) {
+                        properties.dataSource = null;
+                        properties.dataSource = result;
+
+
+                    }
+                });
+
+            }
+        }
+        
+
+
+    }
+    
+</script>
+<style>
+    /* Content area styles */
+    .controlbutton {
+        width: 100%;
+        white-space: pre-wrap;
+    }
+</style>

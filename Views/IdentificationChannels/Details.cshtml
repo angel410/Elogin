@@ -1,0 +1,73 @@
+﻿@model eLogin.ViewModel.IdentificationChannelVM
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>IdentificationChannel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Channel)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Channel)
+        </dd>
+        @*<dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Key)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Key)
+        </dd>*@
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsEnabled)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsEnabled)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DefaultIdentifierEntityId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DefaultIdentifierEntityId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DefaultIdentifierPropertyId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DefaultIdentifierPropertyId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PasswordValidityDays)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PasswordValidityDays)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PasswordValidationRegex)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PasswordValidationRegex)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PasswordValidationHint)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PasswordValidationHint)
+        </dd>
+        @*<dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>*@
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-Id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

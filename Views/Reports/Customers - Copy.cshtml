@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewData["Title"] = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Customers</h1>
+
+<ejs-grid id="Grid"
+          allowResizing="true"
+          dataSource="@ViewBag.DataSource"
+          allowPaging="true"
+          allowSorting="true"
+          allowFiltering="true"
+          allowGrouping="true"
+          allowExcelExport="true"
+          allowPdfExport="true"
+          toolbarClick="toolbarClick"
+          toolbar="@(new List<string>() { "Search","ExcelExport","PdfExport", "Add", "Edit", "Delete","Update","Cancel" })">
+    <e-grid-groupsettings columns="@(new string[] {"CustomerID","EntityCategory","EntityName","EntityInstanceName"})"></e-grid-groupsettings>
+    <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true"></e-grid-editSettings>
+    <e-grid-columns>
+        <e-grid-column field="CustomerID" headerText="Customer ID"></e-grid-column>
+        @*<e-grid-column field="ParentCategoryName" headerText="Parent Entity Category"></e-grid-column>*@
+        <e-grid-column field="EntityCategory" headerText="Category"></e-grid-column>
+        @*<e-grid-column field="EntityID" headerText="Entity ID"></e-grid-column>*@
+        <e-grid-column field="EntityName" headerText="Entity"></e-grid-column>
+        <e-grid-column field="EntityInstanceName" headerText="Instance"></e-grid-column>
+        @*<e-grid-column field="ValueID" headerText="Value ID"></e-grid-column>*@
+        <e-grid-column field="PropertyName" headerText="Property"></e-grid-column>
+        <e-grid-column field="Value" headerText="Value"></e-grid-column>
+
+    </e-grid-columns>
+
+</ejs-grid>
+
+<script>
+
+    function toolbarClick(args) {
+        var gridObj = document.getElementById("Grid").ej2_instances[0];
+        if (args.item.id === 'Grid_pdfexport') {
+            var exportProperties = {
+                header: {
+                    fromTop: 0,
+                    height: 130,
+                    contents: [
+                        {
+                            type: 'PageNumber',
+                            pageNumberType: 'Arabic',
+                            format: 'Page {$current} of {$total} ', //optional
+                            position: { x: 0, y: 50 },
+                            style: { textBrushColor: '#000000', fontSize: 11, hAlign: 'Center' }
+                        },
+                        {
+                            type: 'Line',
+                            style: { penColor: '#000080', penSize: 2, dashStyle: 'Solid' },
+                            points: { x1: 0, y1: 30, x2: 685, y2: 30 }
+                        },
+                        {
+                            type: 'Text',
+                            value: "eLogin - Customers Info Report",
+                            position: { x: 0, y: 0 },
+                            style: { textBrushColor: '#000000', fontSize: 18 }
+                        },
+                        {
+                            type: 'Text',
+                            value: "" + new Date(),
+                            position: { x: 0, y: 35 },
+                            style: { textBrushColor: '#000000', fontSize: 11, hAlign: 'Center'  }
+                        },
+                    ]
+                },
+                pageOrientation: 'Portrait',
+            };
+            gridObj.pdfExport(exportProperties);
+        }
+        if (args.item.id === 'Grid_excelexport') {
+            gridObj.excelExport();
+        }
+    }
+    
+</script>

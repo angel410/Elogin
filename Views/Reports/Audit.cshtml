@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewData["Title"] = "Audit Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    List<object> filterColumns = new List<object>();
+    filterColumns.Add(new { field = "dateTime", matchCase = false, @operator = "greaterthan", predicate = "and", value = DateTime.UtcNow.AddDays(-1) });
+}
+
+<h1>Audit Report</h1>
+
+<ejs-grid id="Grid"
+          dataSource="@ViewBag.DataSource"
+          allowResizing="true"
+          allowPaging="true"
+          allowSorting="true"
+          allowFiltering="true"
+          allowGrouping="true"
+          allowExcelExport="true"
+          allowPdfExport="true"
+          toolbarClick="toolbarClick"
+          toolbar="@(new List<string>() { "Search","ExcelExport","PdfExport" })">
+    @*<e-grid-filterSettings columns="filterColumns"></e-grid-filterSettings>*@
+    <e-grid-columns>
+        <e-grid-column field="id" headerText="Id" width="95"></e-grid-column>
+        <e-grid-column field="action" headerText="Action" width="95"></e-grid-column>
+        <e-grid-column field="tableName" headerText="TableName" width="95"></e-grid-column>
+        <e-grid-column field="recordId" headerText="RecordId" width="95"></e-grid-column>
+        <e-grid-column field="parameter" headerText="Parameter" width="95"></e-grid-column>
+        <e-grid-column field="fromValue" headerText="FromValue" width="95"></e-grid-column>
+        <e-grid-column field="toValue" headerText="ToValue" width="95"></e-grid-column>
+        <e-grid-column field="performedBy" filter="@(new { type="Excel"})" headerText="PerformedBy" width="95"></e-grid-column>
+        <e-grid-column field="dateTime" headerText="DateTime" width="95"></e-grid-column>
+    </e-grid-columns>
+
+</ejs-grid>
+
+<script>
+    function toolbarClick(args) {
+        var gridObj = document.getElementById("Grid").ej2_instances[0];
+
+        if (args.item.id === 'Grid_pdfexport') {
+            var exportProperties = {
+                header: {
+                    fromTop: 0,
+                    height: 130,
+                    contents: [
+                        {
+                            type: 'PageNumber',
+                            pageNumberType: 'Arabic',
+                            format: 'Page {$current} of {$total}', //optional
+                            position: { x: 0, y: 50 },
+                            style: { textBrushColor: '#000000', fontSize: 11, hAlign: 'Center' }
+                        },
+                        {
+                            type: 'Line',
+                            style: { penColor: '#000080', penSize: 2, dashStyle: 'Solid' },
+                            points: { x1: 0, y1: 30, x2: 685, y2: 30 }
+                        },
+                        {
+                            type: 'Text',
+                            value: "eLogin - Audit Report",
+                            position: { x: 0, y: 0 },
+                            style: { textBrushColor: '#000000', fontSize: 18 }
+                        },
+                        {
+                            type: 'Text',
+                            value: "" + new Date(),
+                            position: { x: 0, y: 35 },
+                            style: { textBrushColor: '#000000', fontSize: 11, hAlign: 'Center' }
+                        },
+                    ]
+                },
+                pageOrientation: 'Landscape',
+            };
+
+            gridObj.pdfExport(exportProperties);
+        }
+        if (args.item.id === 'Grid_excelexport') {
+            gridObj.excelExport();
+        }
+    }
+</script>

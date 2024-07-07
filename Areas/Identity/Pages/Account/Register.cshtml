@@ -1,0 +1,38 @@
+﻿@page
+@model RegisterModel
+@using Syncfusion.EJ2
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h4>Create a new account.</h4>
+            <hr />
+            <div asp-valIdation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Registeration.Email"></label>
+                <input asp-for="Registeration.Email" class="form-control" />
+                <span asp-valIdation-for="Registeration.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registeration.Password"></label>
+                <input asp-for="Registeration.Password" class="form-control" />
+                <span asp-valIdation-for="Registeration.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registeration.ConfirmPassword"></label>
+                <input asp-for="Registeration.ConfirmPassword" class="form-control" />
+                <span asp-valIdation-for="Registeration.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

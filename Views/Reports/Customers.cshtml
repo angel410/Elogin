@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewData["Title"] = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    List<object> cols = new List<object>();
+    cols.Add(new { field = "classifiedName", direction = "Ascending" });
+}
+
+
+<h1>Customers</h1>
+
+<ejs-treegrid id="CustomersTreeGrid" idMapping="id" parentIdMapping="parentId" allowResizing="true" dataSource="@ViewBag.DataSource" enableCollapseAll="true"
+              treeColumnIndex="1" childMapping="true"
+              allowRowDragAndDrop="false"
+              allowPaging="true"
+              allowSorting="true"
+              allowFiltering="true"
+              allowExcelExport="true"
+              allowPdfExport="true"
+              toolbarClick="toolbarClick"
+              toolbar="@(new List<string>() { "Search","ExcelExport","PdfExport","ExpandAll","CollapseAll"})">
+    <e-treegrid-pagesettings pageSizes="true" pageSize="20">
+    </e-treegrid-pagesettings>
+    <e-treegrid-filterSettings type="Menu"></e-treegrid-filterSettings>
+    <e-treegrid-searchsettings hierarchyMode="Both"></e-treegrid-searchsettings>
+    <e-treegrid-filtersettings type="Menu" hierarchyMode="Both"></e-treegrid-filtersettings>
+    <e-treegrid-sortsettings columns="cols"></e-treegrid-sortsettings>
+    <e-treegrid-columns>
+        <e-treegrid-column field="id" headerText="" textAlign="Left" width="0" visible="false"></e-treegrid-column>
+        <e-treegrid-column field="classifiedName" headerText="Classification" textAlign="Left" width="100" clipMode="EllipsisWithTooltip"></e-treegrid-column>
+        <e-treegrid-column field="property" headerText="Property" textAlign="Left" width="50" clipMode="EllipsisWithTooltip"></e-treegrid-column>
+        <e-treegrid-column field="value" headerText="Value" textAlign="Left" width="90" clipMode="EllipsisWithTooltip"></e-treegrid-column>
+        <e-treegrid-column field="instanceId" headerText="instanceId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
+        <e-treegrid-column field="entityId" headerText="entityId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
+        <e-treegrid-column field="customerId" headerText="customerId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
+        <e-treegrid-column field="valueId" headerText="valueId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
+    </e-treegrid-columns>
+</ejs-treegrid>
+
+<script>
+
+    function toolbarClick(args) {
+        var gridObj = document.getElementById("CustomersTreeGrid").ej2_instances[0];
+        if (args.item.id === 'CustomersTreeGrid_gridcontrol_pdfexport') {
+            var exportProperties = {
+                header: {
+                    fromTop: 0,
+                    height: 130,
+                    contents: [
+                        {
+                            type: 'PageNumber',
+                            pageNumberType: 'Arabic',
+                            format: 'Page {$current} of {$total} ', //optional
+                            position: { x: 0, y: 50 },
+                            style: { textBrushColor: '#000000', fontSize: 11, hAlign: 'Center' }
+                        },
+                        {
+                            type: 'Line',
+                            style: { penColor: '#000080', penSize: 2, dashStyle: 'Solid' },
+                            points: { x1: 0, y1: 30, x2: 685, y2: 30 }
+                        },
+                        {
+                            type: 'Text',
+                            value: "eLogin - Customers Info Report",
+                            position: { x: 0, y: 0 },
+                            style: { textBrushColor: '#000000', fontSize: 18 }
+                        },
+                        {
+                            type: 'Text',
+                            value: "" + new Date(),
+                            position: { x: 0, y: 35 },
+                            style: { textBrushColor: '#000000', fontSize: 11, hAlign: 'Center' }
+                        },
+                    ]
+                },
+                pageOrientation: 'Portrait',
+            };
+            gridObj.pdfExport(exportProperties);
+        }
+        if (args.item.id === 'CustomersTreeGrid_gridcontrol_excelexport') {
+            gridObj.excelExport();
+        }
+
+
+    }
+
+
+</script>

@@ -1,0 +1,39 @@
+﻿@model eLogin.Models.Entity
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Entity</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateEntity">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EntityName" class="control-label"></label>
+                <input asp-for="EntityName" class="form-control" />
+                <span asp-validation-for="EntityName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EntityCategoryId" class="control-label"></label>
+                <ejs-dropdownlist id="EntityCategoryId" dataSource="@ViewBag.Categories" placeholder="Select an Entity Category">
+                    <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+                @*<select asp-for="EntityCategoryId" class="form-control" asp-items="ViewBag.EntityCategoryId"></select>*@
+                <span asp-valIdation-for="EntityCategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

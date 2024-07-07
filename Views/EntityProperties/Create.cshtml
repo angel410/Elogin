@@ -1,0 +1,47 @@
+﻿@model eLogin.Models.EntityProperty
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>EntityProperty</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-valIdation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EntityId" class="control-label"></label>
+                @*<input asp-for="EntityCategoryId" class="form-control" />*@
+                @*<select asp-for="EntityCategoryId" asp-items="@ViewData["Categories"] as List<SelectListItem>"></select>*@
+                <ejs-dropdownlist id="EntityId" dataSource="@ViewBag.Entities" placeholder="Select an Entity">
+                    <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+                <span asp-valIdation-for="EntityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PropertyId" class="control-label"></label>
+                @*<input asp-for="PropertyId" class="form-control" />*@
+                @*<select asp-for="PropertyId" asp-items="@ViewData["Properties"] as List<SelectListItem>"></select>*@
+            <ejs-dropdownlist id="PropertyId" dataSource="@ViewBag.Properties" placeholder="Select a Property">
+                <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
+            </ejs-dropdownlist>
+                <span asp-valIdation-for="PropertyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

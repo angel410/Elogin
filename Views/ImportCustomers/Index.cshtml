@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Import Customer Info</h1>
+<p class="text-body">This is a critical process. After pressing "Upload" data validation process will start immidiatly after file is uploaded. Please do not close this window, you will be automatically directed to data validation result page once validation is completed. The imported data will be automatically compared to existing data based on unique identifiers and accordingly, existing data will be updated or new data will be inserted.</p>
+<br />
+<h2>Export Data Template</h2>
+<div style="border: 1px solid rgba(0, 0, 0, 0.12);">
+    <div style="padding: 16px 0 16px 12px;">
+        <p>This generats a Template based on the currently existing Entities and their related Categories and Properties</p>
+        <ejs-button id="DownloadTemplate" content="Download Template"></ejs-button>
+    </div>
+</div>
+<br />
+<h2>Import Customer(s) Data</h2>
+<div>
+    <label for="switchfor">Update Existing Customer Records:  </label>
+    <ejs-switch id="overrideExisting" checked="true"></ejs-switch>
+</div>
+
+@{
+    var asyncSettings = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = "/ImportCustomers/Save", RemoveUrl = "/ImportCustomers/Remove" };
+}
+<ejs-uploader id="uploadFiles" asyncSettings="@asyncSettings" multiple="false" autoUpload="false" maxFileSize="300000" success="onUploadSuccess"></ejs-uploader>
+
+<script>
+    function onUploadSuccess(args) {
+        if (args.operation === 'upload') {
+            window.location.href = '../ImportCustomers/ValidatingData?updateExisting=' + document.getElementById('overrideExisting').checked;
+        }
+    }
+    document.getElementById('DownloadTemplate').onclick = function () {
+        window.location.href = '../ImportCustomers/DownloadExcelDocument';
+    }
+</script>

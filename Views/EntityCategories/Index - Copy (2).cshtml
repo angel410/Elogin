@@ -1,0 +1,133 @@
+﻿@model IEnumerable<eLogin.Models.EntityCategory>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Manage Entity Categories</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@using Syncfusion.EJ2
+
+<ejs-treegrid id="TreeGrid" idMapping="TaskId" parentIdMapping="ParentId" hasChildMapping="isParent" cellSave="cellSave"
+              rowDrop="rowDrop" allowRowDragAndDrop="true"
+              treeColumnIndex="0" toolbar="@(new List<string>() { "Add", "Delete", "Cancel", "Update" })">
+    <e-data-manager url="/EntityCategories/DataSource" insertUrl="/EntityCategories/Insert" updateUrl="/EntityCategories/Update" removeUrl="/EntityCategories/Remove" adaptor="UrlAdaptor"></e-data-manager>
+    <e-treegrid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Cell" newRowPosition="Child"></e-treegrid-editSettings>
+    <e-treegrid-columns>
+        <e-treegrid-column field="TaskId" isPrimaryKey="true" headerText="ID" width="95" textAlign="Left"></e-treegrid-column>
+        <e-treegrid-column field="TaskName" headerText="Name" textAlign="Left" width="205"></e-treegrid-column>
+        <e-treegrid-column field="Duration" headerText="Tag Data" textAlign="Left" width="95"></e-treegrid-column>
+    </e-treegrid-columns>
+</ejs-treegrid>
+
+@*<ejs-treegrid id="TreeGrid" idMapping="Id" parentIdMapping="ParentEntityCategoryId" hasChildMapping="HasChildren" cellSave="cellSave"
+                  allowRowDragAndDrop="true"
+                  treeColumnIndex="0" toolbar="@(new List<string>() { "Add", "Delete", "Cancel", "Update" })">
+        <e-data-manager url="/EntityCategories/UrlDataSource" insertUrl="/Home/Insert" updateUrl="/Home/Update" removeUrl="/Home/Remove" adaptor="UrlAdaptor"></e-data-manager>
+        <e-treegrid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Cell" newRowPosition="Child"></e-treegrid-editSettings>
+        <e-treegrid-columns>
+            <e-treegrid-column field="Id" isPrimaryKey="true" headerText="Id" width="95" textAlign="Left"></e-treegrid-column>
+            <e-treegrid-column field="CategoryName" headerText="Category Name" textAlign="Left" width="205"></e-treegrid-column>
+
+        </e-treegrid-columns>
+    </ejs-treegrid>*@
+
+@*<ejs-treegrid id="TreeGrid" dataSource="@ViewBag.dataSource" height="380" idMapping="Id" parentIdMapping="ParentEntityCategoryId" hasChildMapping="HasChildren" treeColumnIndex="1" actionComplete="onDragStop" allowRowDragAndDrop="true"
+                  toolbar="@(new List<string>() { "Add", "Delete", "Update", "Cancel" })">
+        <e-data-manager url="/EntityCategories/UrlDataSource" insertUrl="EntityCategories/Insert" updateUrl="EntityCategories/Update" removeUrl="EntityCategories/Delete" adaptor="UrlAdaptor"></e-data-manager>
+        <e-treegrid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Cell"></e-treegrid-editSettings>
+        <e-treegrid-columns>
+            <e-treegrid-column field="Id" headerText="Id" textAlign="Left" width="0"></e-treegrid-column>
+            <e-treegrid-column field="CategoryName" headerText="Category Name" textAlign="Left" width="95"></e-treegrid-column>
+        </e-treegrid-columns>
+    </ejs-treegrid>*@
+
+@*<ejs-treegrid id="TreeGrid" dataSource="@ViewBag.dataSource" height="380" idMapping="Id" parentIdMapping="ParentEntityCategoryId" treeColumnIndex="1" actionComplete="onDragStop" allowRowDragAndDrop="true" childMapping="true"
+                  toolbar="@(new List<string>() { "Add", "Delete", "Update", "Cancel" })">
+        <e-treegrid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Cell"></e-treegrid-editSettings>
+        <e-treegrid-columns>
+            <e-treegrid-column field="Id" headerText="Id" textAlign="Left" width="0"></e-treegrid-column>
+            <e-treegrid-column field="CategoryName" headerText="Category Name" textAlign="Left" width="95"></e-treegrid-column>
+        </e-treegrid-columns>
+    </ejs-treegrid>*@
+@*<ejs-treeview id="tree1" allowDragAndDrop="true" nodeDragStop="onDragStop" d>
+        <e-treeview-fields dataSource="ViewBag.dataSource" id="Id" text="CategoryName" parentID="ParentEntityCategoryId" expanded="expanded" hasChildren="HasChildren"></e-treeview-fields>
+    </ejs-treeview>*@
+@*<script>
+        //var listData = [];
+        //var id = 1;
+        function onDragStop(args) {
+        }
+        //    window.location.href = '../EntityCategories/SubmitChanges?TreeItems=' + document.getElementById('TreeGrid').;
+
+            //var targetEle = ej.base.closest(args.target, '.e-droppable');
+            //targetEle = targetEle ? targetEle : args.target;
+            //// Check the target as ListView or not
+            //if (targetEle && targetEle.classList.contains('custom-list')) {
+            //    args.cancel = true;
+            //    var newData = [];
+            //    if (args.draggedNode.classList.contains('e-active')) {
+            //        var selNodes = this.selectedNodes;
+            //        var len = selNodes.length;
+            //        for (var i = 0; i < len; i++) {
+            //            var nodeEle = document.querySelector('[data-uid="' + selNodes[i] + '"]').querySelector('.e-list-text');
+            //            var nodeText = nodeEle.textContent;
+            //            var newNode = { id: 'l' + id, text: nodeText, class: 'custom-delete', iconId: 'i' + id };
+            //            id++;
+            //            newData.push(newNode);
+            //        }
+            //    } else {
+            //        var text = 'text';
+            //        var nodeText = args.draggedNodeData[text];
+            //        var newNode = { id: 'l' + id, text: nodeText, class: 'custom-delete', iconId: 'i' + id };
+            //        id++;
+            //        newData.push(newNode);
+            //    }
+            //    // Add collection of node to ListView
+            //    var listObj = document.getElementById('list').ej2_instances[0];
+            //    listObj.addItem(newData, undefined);
+            //}
+        //}
+    </script>*@
+<script>
+        // for handling editing at server end
+        function cellSave(args) {
+            var TaskId = args.rowData.TaskId; //primary key value
+            var TaskName = (args.columnName == "TaskName") ? args.value : args.rowData.TaskName;
+            var Duration = (args.columnName == "Duration") ? args.value : args.rowData.Duration;
+            var value = { TaskId: TaskId, TaskName: TaskName, Duration: Duration };
+           $.ajax({
+            url: '@Url.Action("Update")',
+            data: JSON.stringify({ value: value }),
+            method: 'POST',
+            contentType: "application/json; charset=utf-8",
+           success: function () {
+
+           }
+      });
+        }
+      //for handling Row Drag and Drop at server end
+     function rowDrop(args) {
+        var record1 = this.getCurrentViewRecords()[args.fromIndex][this.idMapping];
+        var record2 = this.getCurrentViewRecords()[args.dropIndex][this.idMapping];
+        var data = args.data[0];
+        var position = { dragidMapping: record1, dropidMapping: record2, position: args.dropPosition };
+         // if you need to update the Row Drag and Drop value at server end you can use ajax post
+        $.ajax({
+           url: '@Url.Action("MyTestMethod")',
+            data: JSON.stringify({ value: data, pos: position }),
+           dataType: "json",
+           method: 'POST',
+           contentType: "application/json; charset=utf-8",
+           success: function (data) {
+
+           }
+      });
+     }
+
+</script>
+

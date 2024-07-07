@@ -1,0 +1,362 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "eLoginContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "eLogin",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 1,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[AddCustomerEntityRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AddCustomerIdentifierRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AddCustomerInfoRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AddCustomerInfoValueRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AssignInfoPropertyToEntityCategoryRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AssignPropertyToEntityRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Audit]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ChannelEntity]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ChannelLoginProperty]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CreateCustomerEntityInstanceRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CreateCustomerEntityInstanceResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CreateCustomerEntityRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CreateCustomerEntityResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CreateEntityCategoryRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CreateEntityCategoryResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CreateEntityCategoryResponse1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CreateInfoPropertyRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CreateInfoPropertyResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CreateInfoPropertyResponse1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Customer]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomerEntityInstance]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomerInfoValue]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomerLockRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomerLoginAttempt]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CustomerPassword]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeleteCustomerEntityInstanceRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeleteCustomerEntityRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeleteCustomerInfoRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeleteEntityCategoryRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DeleteInfoPropertyRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Entity]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EntityCategory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EntityInstance]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EntityInstancePropertyValue]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EntityProperty]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GeneralResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetCustomerInfoRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetCustomerInfoResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetCustomerInfoResponse1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetEntitiesRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetEntitiesResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetEntityCategoriesRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetEntityCategoriesResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetEntityCategoriesResponse1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetEntityCategoryInfoPropertiesRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetEntityCategoryInfoPropertiesResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetEntityPropertiesRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetEntityPropertiesResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetInfoPropertiesRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetInfoPropertiesResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GetInfoPropertiesResponse1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HandshakeRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HandshakeResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[IdentificationChannel]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LoginRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MatchingCustomer]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Property]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RegisterRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[RegisterResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ResetCustomerChannelPasswordRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Response<CreateCustomerEntityInstanceResponse>]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Response<CreateEntityCategoryResponse>]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Response<CreateInfoPropertyResponse>]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Response<GetCustomerInfoResponse>]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Response<GetEntityCategoriesResponse>]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Response<GetEntityPropertiesResponse>]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Response<GetInfoPropertiesResponse>]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Response<SearchCustomerResponse>]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SearchCustomerByAnyValueRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SearchCustomerByPropertyValueRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SearchCustomerResponse]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SearchCustomerResponse1]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Session]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SystemSetting]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UpdateCustomerChannelPasswordRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UpdateCustomerEntityInstanceRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UpdateCustomerEntityRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UpdateCustomerInfoRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UpdateEntityCategoryRequest]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UpdateInfoPropertyRequest]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "angel.eLogin.dbo",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

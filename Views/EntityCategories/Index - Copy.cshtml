@@ -1,0 +1,43 @@
+﻿@model IEnumerable<eLogin.Models.EntityCategory>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Manage Entity Categories</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentEntityCategoryId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.SingleOrDefault(a => a.Id == item.ParentEntityCategoryId).CategoryName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-Id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-Id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-Id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

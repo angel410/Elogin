@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h1>Reports</h1>
+
+<div>
+    <p style="text-align:center">
+        <br />
+        <ejs-button id="Customers" content="Customers" cssClass="controlbutton"></ejs-button>
+        <br />
+        <br />
+        <ejs-button id="CustomerLoginAttempts" content="Customer Login Attempts" cssClass="controlbutton"></ejs-button>
+        <br />
+        <br />
+        <ejs-button id="LockedCustomers" content="Locked Customers" cssClass="controlbutton"></ejs-button>
+        <br />
+        <br />
+        <ejs-button id="AuditServer" content="Audit" cssClass="controlbutton"></ejs-button>
+    </p>
+    
+</div>
+<script>
+    document.getElementById('Customers').onclick = function () {
+        window.location.href = "Customers";
+    }
+    document.getElementById('CustomerLoginAttempts').onclick = function () {
+        window.location.href = "CustomerLoginAttempts";
+    }
+    document.getElementById('LockedCustomers').onclick = function () {
+        window.location.href = "LockedCustomers";
+    }
+    document.getElementById('AuditServer').onclick = function () {
+        window.location.href = "AuditServer";
+    }
+</script>
+<style>
+    .controlbutton {
+        width: 700px;
+    }
+</style>

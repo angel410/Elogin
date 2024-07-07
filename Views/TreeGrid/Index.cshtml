@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<ejs-treegrid id="TreeGrid" idMapping="TaskId" parentIdMapping="ParentId" hasChildMapping="isParent" cellSave="cellSave"
+              rowDrop="rowDrop" allowRowDragAndDrop="true"
+              treeColumnIndex="0" toolbar="@(new List<string>() { "Add", "Delete", "Cancel", "Update" })">
+    <e-data-manager url="/TreeGrid/DataSource" insertUrl="/TreeGrid/Insert" updateUrl="/TreeGrid/Update" removeUrl="/TreeGrid/Remove" adaptor="UrlAdaptor"></e-data-manager>
+    <e-treegrid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" mode="Cell" newRowPosition="Child"></e-treegrid-editSettings>
+    <e-treegrid-columns>
+        <e-treegrid-column field="TaskId" isPrimaryKey="true" headerText="ID" width="95" textAlign="Left"></e-treegrid-column>
+        <e-treegrid-column field="TaskName" headerText="Name" textAlign="Left" width="205"></e-treegrid-column>
+        <e-treegrid-column field="Duration" headerText="Tag Data" textAlign="Left" width="95"></e-treegrid-column>
+    </e-treegrid-columns>
+</ejs-treegrid>
+<script>
+        // for handling editing at server end
+        function cellSave(args) {
+            var TaskId = args.rowData.TaskId; //primary key value
+            var TaskName = (args.columnName == "TaskName") ? args.value : args.rowData.TaskName;
+            var Duration = (args.columnName == "Duration") ? args.value : args.rowData.Duration;
+            var value = { TaskId: TaskId, TaskName: TaskName, Duration: Duration };
+           $.ajax({
+            url: '@Url.Action("Update")',
+            data: JSON.stringify({ value: value }),
+            method: 'POST',
+            contentType: "application/json; charset=utf-8",
+           success: function () {
+
+           }
+      });
+        }
+      //for handling Row Drag and Drop at server end
+     function rowDrop(args) {
+        var record1 = this.getCurrentViewRecords()[args.fromIndex][this.idMapping];
+        var record2 = this.getCurrentViewRecords()[args.dropIndex][this.idMapping];
+        var data = args.data[0];
+        var position = { dragidMapping: record1, dropidMapping: record2, position: args.dropPosition };
+         // if you need to update the Row Drag and Drop value at server end you can use ajax post
+        $.ajax({
+           url: '@Url.Action("MyTestMethod")',
+            data: JSON.stringify({ value: data, pos: position }),
+           dataType: "json",
+           method: 'POST',
+           contentType: "application/json; charset=utf-8",
+           success: function (data) {
+
+           }
+      });
+     }
+
+</script>

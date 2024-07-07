@@ -1,0 +1,395 @@
+﻿@using eLogin.Settings;
+@inject Microsoft.Extensions.Options.IOptions<LdapSettings> ldapSettings
+@{ 
+    var sideBarHeight = "560px";
+    if (ldapSettings.Value.LdapEnabled)
+    {
+        sideBarHeight = "458px";
+    }
+    else
+    {
+        sideBarHeight = "560px";
+    }
+}
+<style>
+    /* Content area styles */
+    .e-toolbar-items
+    {
+        height:fit-content!important;
+    }
+    .maincontent {
+        background-image: url(/Theme/background.jpg);
+        min-height: 825px;
+        padding-right: 144px;
+        padding-left: 72px;
+        background-repeat-y: no-repeat;
+    }
+
+    .container {
+        max-width: 2048px;
+    }
+
+    .layout-container {
+        background-color: white;
+        opacity: 93%;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 20px;
+        padding: 0px;
+    }
+
+    .sub-title {
+        text-align: center;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    #wrapper .sub-title .column {
+        display: inline-block;
+        padding: 10px;
+    }
+
+    .center {
+        text-align: center;
+        display: none;
+        font-size: 13px;
+        font-weight: 400;
+        margin-top: 20px;
+    }
+
+    .sb-content-tab .center {
+        display: block;
+    }
+
+    /* end of content area styles */
+
+    /* Sidebar styles */
+
+    .sb-content-tab #wrapper {
+        display: none;
+    }
+
+    #dockSidebar.e-sidebar.e-right.e-close {
+        visibility: visible;
+        transform: translateX(0%);
+    }
+
+    #dockSidebar .e-icons::before {
+        font-size: 25px;
+    }
+
+    /* dockbar icon Style */
+
+    #dockSidebar .home::before {
+        content: '\e102';
+    }
+
+    #dockSidebar .profile::before {
+        content: '\e10c';
+    }
+
+    #dockSidebar .identification-channel::before {
+        content: '\e7ff';
+    }
+
+    #dockSidebar .properties::before {
+        content: '\e605';
+    }
+
+    #dockSidebar .entity-categories::before {
+        content: '\e5a7';
+    }
+
+    #dockSidebar .entity-properties::before {
+        content: '\e509';
+    }
+
+    #dockSidebar .import-customers::before {
+        content: '\e77a';
+    }
+
+    #dockSidebar .license-management::before {
+        content: '\e77f';
+    }
+
+    #dockSidebar .report::before {
+        content: '\e70f';
+    }
+
+    #dockSidebar .users::before {
+        content: '\e424';
+    }
+
+    #dockSidebar .settings::before {
+        content: '\e10b';
+    }
+
+    .e-sidebar .expand::before,
+    .e-sidebar.e-right.e-open .expand::before {
+        content: '\e10f';
+    }
+
+    .e-sidebar.e-open .expand::before,
+    .e-sidebar.e-right .expand::before {
+        content: '\e10e';
+    }
+
+    /* end of dockbar icon Style */
+
+    #dockSidebar.e-close .sidebar-item {
+        padding: 0px 20px;
+    }
+
+    #dockSidebar.e-dock.e-close span.e-text {
+        display: none;
+    }
+
+    #dockSidebar.e-dock.e-open span.e-text {
+        display: inline-block;
+    }
+
+    #dockSidebar li {
+        list-style-type: none;
+        cursor: pointer;
+    }
+
+    #dockSidebar ul {
+        padding: 0px;
+    }
+
+    #dockSidebar.e-sidebar ul li:hover span {
+        color: white
+    }
+
+    #dockSidebar span.e-icons {
+        color: #c0c2c5;
+        line-height: 2;
+    }
+
+    .e-open .e-icons {
+        margin-right: 16px;
+    }
+
+    .e-open .e-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 23px;
+        font-size: 15px;
+    }
+
+    .sidebar-item {
+        text-align: center;
+        border-bottom: 1px #e5e5e58a solid;
+    }
+
+    .e-sidebar.e-open .sidebar-item {
+        text-align: left;
+        padding-left: 15px;
+        color: #c0c2c5;
+    }
+
+    #dockSidebar.e-sidebar {
+        background: #2d323e;
+        overflow: hidden;
+        height: @sideBarHeight;
+    }
+
+    @@font-face {
+        font-family: 'e-icons';
+        src: url(data:application/x-font-ttf;charset=utf-8;base64,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) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    /* end of sidebar styles */
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="wIdth=device-wIdth, initial-scale=1.0" />
+    <title>@ViewData["Title"] - eLogin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/Theme/bootstrap4.css" rel="stylesheet" />
+    <link href="~/Theme/Originalmaterial.css" rel="stylesheet" />
+    <link href="~/Theme/material.css" rel="stylesheet" />
+    <!-- Syncfusion Essential JS 2 Styles -->
+    @*<link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />*@
+    @*<link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/bootstrap4.css" />*@
+    @*<link rel="stylesheet" href="~/Theme/material.scss" />*@
+    <!-- Syncfusion Essential JS 2 Scripts -->
+    <script src="~/js/ej2.min.js" type="text/javascript"></script>
+    @*<script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>*@
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img id="logo" src="~/Theme/Customer.png" style="height:50px" title="eLogin" alt="" />
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1" style="font-size:small">
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div id="main-content container-fluid col-md-12 " class="maincontent">
+
+        <!-- main content declaration -->
+        @*<div class="title">Main content</div>
+            <div class="sub-title"> Click the expand icon to open and collapse icons to close the Sidebar</div>*@
+        <div class="container layout-container" style="align-content:center">
+            <main role="main" class="pb-3">
+                @RenderBody()
+
+            </main>
+        </div>
+    </div>
+
+    <!-- sidebar element declaration -->
+    <ejs-sidebar id="dockSidebar" width="265px" dockSize="72px" enableDock="true" 
+    closeOnDocumentClick="true" target=".maincontent" type="Push">
+        <e-content-template>
+            <div class="dock">
+                <div class="sidebar-header header-cover" style="background-color: #1694CA">
+                    <div class="image-container">
+                        <div class="sidebar-image">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="control-section">
+
+                    <ul id="navigation" style="display:none">
+                        <li><a href="/Home/Index">Sidebar</a></li>
+                        <li><a href="/Home/ContextMenu">ContextMenu</a></li>
+                        <li><a href="/Home/Accordion">Accordion</a></li>
+                    </ul>
+                    <ul id="layouts" style="display:none">
+                        <li><a href="/Home/Avatar">Avatar</a></li>
+                        <li><a href="/Home/Card">Card</a></li>
+                        <li><a href="/Home/Splitter">Splitter</a></li>
+                    </ul>
+                    <ul id="inputs" style="display:none">
+                        <li><a href="/Home/InputMask">Input Mask</a></li>
+                        <li><a href="/Home/TextBox">TextBox</a></li>
+                    </ul>
+                </div>
+                <ul>
+                    <li class="sidebar-item" id="toggle">
+                        <span class="e-icons expand"></span>
+                        <span class="e-text" title="menu">Menu</span>
+
+                    </li>
+                    <li class="sidebar-item" onclick="location='/'">
+                        <span class="e-icons home"></span>
+                        <span class="e-text" title="home">Home</span>
+                     
+                    </li>
+                    <li hidden="@ldapSettings.Value.LdapEnabled" class="sidebar-item" onclick="location='/Identity/Account/Manage'">
+                        <span class="e-icons profile" title="Profile"></span>
+                        <span class="e-text">Profile</span>
+                    </li>
+                    <li hidden="@ldapSettings.Value.LdapEnabled" class="sidebar-item" onclick="location='/Users'">
+                        <span class="e-icons users" title="Manage Users"></span>
+                        <span class="e-text">Manage Users</span>
+                    </li>
+                    @* <li class="sidebar-item" onclick="location='/PasswordSettings'">
+                        <span class="e-icons settings" title="Password Settings"></span>
+                        <span class="e-text">Password Settings</span>
+                    </li> *@
+                    <li class="sidebar-item" onclick="location='/ImportCustomers'">
+                        <span class="e-icons import-customers" title="Import Customers Info"></span>
+                        <span class="e-text">Import Customers Info</span>
+                    </li>
+                    <li class="sidebar-item" onclick="location='/LicenseManager'">
+                        <span class="e-icons license-management" title="License Manager"></span>
+                        <span class="e-text">License Manager</span>
+                    </li>
+                    <li class="sidebar-item" onclick="location='/CustomerDataManagement'">
+                        <span class="e-icons properties" title="Customer Data Management"></span>
+                        <span class="e-text">Customer Data Management</span>
+                    </li>
+                
+                    <li class="sidebar-item" onclick="location='/DataStructureManagement'">
+                        <span class="e-icons entity-properties" title="Data Structure Management"></span>
+                        <span class="e-text">Data Structure Management</span>
+                    </li>
+                    <li class="sidebar-item" onclick="location='/IdentificationChannels'">
+                        <span class="e-icons identification-channel" title="Identification Channels"></span>
+                        <span class="e-text">Identification Channels</span>
+                    </li>
+                    <li class="sidebar-item" onclick="location='/SystemSetting'">
+                        <span class="e-icons settings" title="Settings"></span>
+                        <span class="e-text">Settings</span>
+                    </li>
+                    <li class="sidebar-item" onclick="location='/Reports/Index'">
+                        <span class="e-icons report" title="Reports"></span>
+                        <span class="e-text">Reports</span>
+                    </li>
+                  
+                </ul>
+            </div>
+            
+        </e-content-template>
+    </ejs-sidebar>
+    <!-- end of sidebar element -->
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container" style="text-align:center">
+            eLogin by &nbsp; &nbsp; <img src="~/Theme/ExpertFlow.png" style="height:20px" title="eLogin" alt="" />  &nbsp; &nbsp; &copy; 2020
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+            document.getElementById('js-licensing').style.display = 'none';
+
+        };
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            dockBar = document.getElementById('dockSidebar').ej2_instances[0];
+            document.getElementById('toggle').onclick = function () {
+                dockBar.toggle();
+                //var element = document.getElementById("nav");
+                // element.classList.remove("col-lg-10");
+                //   element.classList.add("col-lg-11");
+                //document.getElementById("footer").style.marginLeft="125px";
+            };
+        });
+
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+    <!-- Syncfusion Essential JS 2 ScriptManager -->
+@*     <script src="https://cdn.syncfusion.com/ej2/20.3.47/dist/ej2.min.js"></script>
+ *@
+    <ejs-scripts></ejs-scripts>
+
+</body>
+</html>
+

@@ -1,0 +1,46 @@
+﻿@*@model IEnumerable<eLogin.Models.EntityCategoryProperty>*@
+@model IEnumerable<eLogin.ViewModel.EntityPropertyVM>
+@*@model IEnumerable<eLogin.Models.EntityCategory>
+    @model IEnumerable<eLogin.Models.Property>*@
+
+@{
+    ViewData["Title"] = "Entity Properties";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Manage Entity Properties</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EntityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PropertyName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropertyName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-Id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-Id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-Id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,203 @@
+﻿@model IEnumerable<eLogin.Models.SystemSetting>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ejs-toast id="toast" showCloseButton="true" showProgressBar="true" timeOut="3000">
+    <e-toast-position X="Right" Y="Top"></e-toast-position>
+</ejs-toast>
+
+<h1>System Settings</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SettingName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-Id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-Id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-Id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Set Customer Primary Property</h3>
+
+<p>To change it please select a property using the dropdown lists below.</p>
+<p>
+    <ejs-dropdowntree id="categoriesTDDL" popupHeight="200px" width="300px" placeholder="Select a category" change="categoriesTDDLvalueChange" changeOnBlur="false">
+        <e-dropdowntree-fields dataSource="ViewBag.categoriesDataSource" value="id" parentValue="parentId" text="categoryName" expanded="expanded" hasChildren="hasChild"></e-dropdowntree-fields>
+    </ejs-dropdowntree>
+    <ejs-dropdownlist id="entitiesDDL" popupHeight="200px" dataSource="@ViewBag.entityDataSource" width="300px" placeholder="Select an entity" change="entitiesDDLvalueChange">
+        <e-dropdownlist-fields value="id" text="entityName"></e-dropdownlist-fields>
+    </ejs-dropdownlist>
+    <ejs-dropdownlist id="propertiesDDL" popupHeight="200px" dataSource="@ViewBag.propertyDataSource" width="300px" placeholder="Select a property" change="propertiesDDLvalueChange">
+        <e-dropdownlist-fields value="id" text="propertyName"></e-dropdownlist-fields>
+    </ejs-dropdownlist>
+</p>
+
+
+<br />
+
+
+<h3>Upload Your Logo Here</h3>
+<p>Use PNG transparent logo file.</p>
+@{
+    var asyncSettings = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = "/SystemSetting/UploadCustomerLogo", RemoveUrl = "/SystemSetting/Remove" };
+}
+<ejs-uploader id="uploadFiles" asyncSettings="@asyncSettings" multiple="false" autoUpload="true" success="onUploadSuccess"></ejs-uploader>
+<br />
+<h3>Upload eLogin Background Here</h3>
+<p>Use JPG image file.</p>
+@{
+    var asyncBackgroundSettings = new Syncfusion.EJ2.Inputs.UploaderAsyncSettings { SaveUrl = "/SystemSetting/UploadBackground", RemoveUrl = "/SystemSetting/Remove" };
+}
+<ejs-uploader id="uploadFiles2" asyncSettings="@asyncBackgroundSettings" multiple="false" autoUpload="true" success="onUploadSuccess"></ejs-uploader>
+<script>
+    var primaryPropertyChangeCounter = 0;
+
+    window.addEventListener("load", function () {
+        var categoriesTDDL = document.getElementById("categoriesTDDL").ej2_instances[0];
+        var EntitiesDDL = document.getElementById("entitiesDDL").ej2_instances[0];
+        var propertiesDDL = document.getElementById("propertiesDDL").ej2_instances[0];
+        var selectedCategory = '@(ViewBag.categoryId)';
+        if ('@(ViewBag.propertyId)') {
+            var str_array = [selectedCategory];
+            categoriesTDDL.value = str_array;
+            EntitiesDDL.value = '@(ViewBag.entityId)';
+            propertiesDDL.value = '@(ViewBag.propertyId)';
+        }
+        else {
+            primaryPropertyChangeCounter = 1;
+        }
+        
+    });
+
+    
+
+    function loadPrimaryProperty(){
+
+
+    }
+
+    function onUploadSuccess(args) {
+        if (args.operation === 'upload') {
+            window.location.href = '../SystemSetting';
+        }
+    }
+
+    function categoriesTDDLvalueChange() {
+        var ddTreeObj = document.getElementById("categoriesTDDL").ej2_instances[0];
+        var EntitiesDDL = document.getElementById("entitiesDDL").ej2_instances[0];
+        var categoryId = ddTreeObj.value;
+        $.ajax({
+            type: 'POST',
+            url: '../SystemSetting/GetEntities',
+            data: { categoryId: categoryId },
+            success: function (result) {
+
+                EntitiesDDL.dataSource = null;
+
+                EntitiesDDL.dataBind();
+
+                EntitiesDDL.dataSource = result;
+
+                EntitiesDDL.dataBind();
+
+
+            }
+        });
+
+
+    }
+
+    function entitiesDDLvalueChange() {
+        var EntitiesDDL = document.getElementById("entitiesDDL").ej2_instances[0];
+        var propertiesDDL = document.getElementById("propertiesDDL").ej2_instances[0];
+        var entityId = EntitiesDDL.value;
+        $.ajax({
+            type: 'POST',
+            url: '../SystemSetting/GetProperties',
+            data: { entityId: entityId },
+            success: function (result) {
+
+                propertiesDDL.dataSource = null;
+
+                propertiesDDL.dataBind();
+
+                propertiesDDL.dataSource = result;
+
+                propertiesDDL.dataBind();
+
+
+            }
+        });
+
+
+    }
+
+    function propertiesDDLvalueChange() {
+        var EntitiesDDL = document.getElementById("entitiesDDL").ej2_instances[0];
+        var propertiesDDL = document.getElementById("propertiesDDL").ej2_instances[0];
+        var propertyId = propertiesDDL.value;
+        if (primaryPropertyChangeCounter > 0 && propertyId) {
+            $.ajax({
+                type: 'POST',
+                url: '../SystemSetting/SetPrimaryProperty',
+                data: { propertyId: propertyId },
+                success: function (result) {
+                    if (result === "Success") {
+                        //alert(EntitiesDDL.text + " - " + propertiesDDL.text + " has successfully been set as primary customer property.");
+                        var toast = document.getElementById('toast').ej2_instances[0];
+                        toast.target = document.body;
+                        toast.title = "Success";
+                        toast.content = EntitiesDDL.text + " - " + propertiesDDL.text + " has successfully been set as primary customer property.";
+                        toast.show();
+                    }
+                    else {
+                        //alert(result);
+                        var toast = document.getElementById('toast').ej2_instances[0];
+                        toast.target = document.body;
+                        toast.title = "Error";
+                        toast.content = result;
+                        toast.show();
+                    }
+
+
+
+                }
+            });
+        }
+        primaryPropertyChangeCounter = primaryPropertyChangeCounter + 1;
+        
+
+
+    }
+
+</script>
+
