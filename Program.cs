@@ -37,10 +37,15 @@ builder.Services.AddIdentity<User, Role>(options =>
         .AddEntityFrameworkStores<DatabaseContext>()
         .AddDefaultTokenProviders();
 
+builder.Configuration.AddUserSecrets<Program>();
+
+// Get the connection string from configuration
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//var connectionString_ = configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
                options.UseSqlServer(
-                configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies(), ServiceLifetime.Transient);
+                 builder.Configuration.GetConnectionString("DefaultConnection")).UseLazyLoadingProxies(), ServiceLifetime.Transient);
 
 
 
