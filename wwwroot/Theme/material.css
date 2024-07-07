@@ -19965,7 +19965,7 @@ textarea.e-input::-webkit-input-placeholder {
 .e-outline.e-input-group.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error).e-disabled .e-input-in-wrap {
   background-image: none;
   border-bottom-color: rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.06); }
+}
 
 .e-outline.e-float-input.e-input-group.e-disabled.e-valid-input:not(.e-input-focus),
 .e-outline.e-float-input.e-input-group.e-disabled.e-valid-input:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left):not(.e-input-focus),
@@ -49361,7 +49361,6 @@ span.e-table-box.e-rbox-select {
     margin-left: 12px; }
   .e-query-builder .e-group-header .e-qb-toggle.e-btn.e-small {
     border-bottom-right-radius: 0;
-    border-radius: 2px;
     border-top-right-radius: 0; }
   .e-query-builder .e-group-header .e-btn-group {
     border: none;
