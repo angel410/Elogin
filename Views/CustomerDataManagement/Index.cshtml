@@ -28,34 +28,37 @@
     <div class="e-content">
         <div>
             <div class="row">
-                <dt class="col-sm-5">
-                    <ejs-treegrid id="EntitiesTreeGrid" dataSource="@ViewBag.entitiesDataSource" idMapping="categoryId" parentIdMapping="parentCategoryId"
-                                  treeColumnIndex="1" childMapping="true" rowSelected="EntitiesGridRowSelected" rowDeselected="EntitiesGridRowDeselected"
-                                  allowRowDragAndDrop="false" actionComplete="EntitiesActionComplete">
-                        <e-treegrid-filtersettings type="Menu"></e-treegrid-filtersettings>
-                        <e-treegrid-columns>
-                            <e-treegrid-column field="categoryId" headerText="" textAlign="Left" width="0" visible="false"></e-treegrid-column>
-                            <e-treegrid-column field="categoryName" headerText="Category" textAlign="Left" width="95"></e-treegrid-column>
-                            <e-treegrid-column field="entityName" headerText="Entity" textAlign="Left" width="95"></e-treegrid-column>
-                            <e-treegrid-column field="entityId" headerText="entity Id" textAlign="Left" width="95" visible="false"></e-treegrid-column>
-                        </e-treegrid-columns>
-                    </ejs-treegrid>
-                    <br />
-                    <ejs-button id="save" content="SAVE" cssClass="controlbutton"></ejs-button>
-                </dt>
-                <dt class="col-sm-7">
-                    <input id="newInstanceName" class="form-control" disabled placeholder="" onchange="UpdateInstanceInfo()" />
-                    <br />
-                    <ejs-grid id="InstanceGrid" actionComplete="ValidateInput">
-                        <e-grid-editSettings allowEditing="true"></e-grid-editSettings>
-                        <e-grid-columns>
-                            <e-grid-column field="propertyId" isPrimaryKey="true" headerText="Property" textAlign="Left" allowEditing="false" visible="false"></e-grid-column>
-                            <e-grid-column field="propertyName" headerText="Property" textAlign="Left" allowEditing="false"></e-grid-column>
-                            <e-grid-column field="value" headerText="Value"></e-grid-column>
-                        </e-grid-columns>
-                    </ejs-grid>
+                <dl>
+                    <dt class="col-sm-5">
+                        <ejs-treegrid id="EntitiesTreeGrid" dataSource="@ViewBag.entitiesDataSource" idMapping="categoryId" parentIdMapping="parentCategoryId"
+                                      treeColumnIndex="1" childMapping="true" rowSelected="EntitiesGridRowSelected" rowDeselected="EntitiesGridRowDeselected"
+                                      allowRowDragAndDrop="false" actionComplete="EntitiesActionComplete">
+                            <e-treegrid-filtersettings type="Menu"></e-treegrid-filtersettings>
+                            <e-treegrid-columns>
+                                <e-treegrid-column field="categoryId" headerText="" textAlign="Left" width="0" visible="false"></e-treegrid-column>
+                                <e-treegrid-column field="categoryName" headerText="Category" textAlign="Left" width="95"></e-treegrid-column>
+                                <e-treegrid-column field="entityName" headerText="Entity" textAlign="Left" width="95"></e-treegrid-column>
+                                <e-treegrid-column field="entityId" headerText="entity Id" textAlign="Left" width="95" visible="false"></e-treegrid-column>
+                            </e-treegrid-columns>
+                        </ejs-treegrid>
+                        <br />
+                        <ejs-button id="save" content="SAVE" cssClass="controlbutton"></ejs-button>
+                    </dt>
+                    <dt class="col-sm-7">
+                        <input id="newInstanceName" class="form-control" disabled placeholder="" onchange="UpdateInstanceInfo()" />
+                        <br />
+                        <ejs-grid id="InstanceGrid" actionComplete="ValidateInput">
+                            <e-grid-editSettings allowEditing="true"></e-grid-editSettings>
+                            <e-grid-columns>
+                                <e-grid-column field="propertyId" isPrimaryKey="true" headerText="Property" textAlign="Left" allowEditing="false" visible="false"></e-grid-column>
+                                <e-grid-column field="propertyName" headerText="Property" textAlign="Left" allowEditing="false"></e-grid-column>
+                                <e-grid-column field="value" headerText="Value"></e-grid-column>
+                            </e-grid-columns>
+                        </ejs-grid>
 
-                </dt>
+                    </dt>
+                </dl>
+              
 
             </div>
 
@@ -63,68 +66,71 @@
         </div>
         <div>
             <div class="row">
-                <dt class="col-sm-8">
-                    <input id="searchCustomers" class="form-control" placeholder="Search customers by any value" />
-                    <ejs-button id="search" content="Search" cssClass="controlbutton"></ejs-button>
-                    <br />
-                    <ejs-treegrid id="CustomersTreeGrid" idMapping="id" parentIdMapping="parentId" allowResizing="true"
-                                  treeColumnIndex="1" childMapping="true"
-                                  allowRowDragAndDrop="false" rowSelected="customerRowSelected" rowDeselected="customerRowDeselected"
-                                  allowPaging="true"
-                                  allowSorting="true"
-                                  allowFiltering="true"
-                                  allowExcelExport="true"
-                                  allowPdfExport="true"
-                                  toolbarClick="toolbarClick"
-                                  enableCollapseAll="false"
-                                  toolbar="@(new List<string>() { "Search","ExcelExport","PdfExport","ExpandAll","CollapseAll"})">
-                        <e-treegrid-pagesettings pageSizes="true" pageSize="20" pageSizeMode="Root">
-                        </e-treegrid-pagesettings>
-                        <e-treegrid-filterSettings type="Menu"></e-treegrid-filterSettings>
-                        <e-treegrid-searchsettings hierarchyMode="Both"></e-treegrid-searchsettings>
-                        <e-treegrid-filtersettings type="Menu" hierarchyMode="Both"></e-treegrid-filtersettings>
-                        <e-treegrid-sortsettings columns="cols"></e-treegrid-sortsettings>
-                        <e-treegrid-columns>
-                            <e-treegrid-column field="id" headerText="" textAlign="Left" width="0" visible="false"></e-treegrid-column>
-                            <e-treegrid-column field="classifiedName" headerText="Classification" textAlign="Left" width="100" clipMode="EllipsisWithTooltip"></e-treegrid-column>
-                            <e-treegrid-column field="property" headerText="Property" textAlign="Left" width="50" clipMode="EllipsisWithTooltip"></e-treegrid-column>
-                            <e-treegrid-column field="value" headerText="Value" textAlign="Left" width="90" clipMode="EllipsisWithTooltip"></e-treegrid-column>
-                            <e-treegrid-column field="instanceId" headerText="instanceId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
-                            <e-treegrid-column field="entityId" headerText="entityId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
-                            <e-treegrid-column field="entityName" headerText="entityName" textAlign="Left" width="95" visible="false"></e-treegrid-column>
-                            <e-treegrid-column field="categoryId" headerText="categoryId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
-                            <e-treegrid-column field="customerId" headerText="customerId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
-                            <e-treegrid-column field="valueId" headerText="valueId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
-                            <e-treegrid-column field="primaryPropertyValue" headerText="primaryPropertyValue" textAlign="Left" width="95" visible="false"></e-treegrid-column>
-                        </e-treegrid-columns>
-                    </ejs-treegrid>
-                </dt>
-                <dt class="col-sm-4">
-                    <p id="selectedCustomerNotification">Please select a customer</p>
-                    <ejs-dropdowntree id="categoriesTDDL" enabled="false" popupHeight="200px" placeholder="Select a category" change="categoriesTDDLvalueChange" changeOnBlur="false">
-                        <e-dropdowntree-fields dataSource="ViewBag.categoriesDataSource" value="id" parentValue="parentId" text="categoryName" expanded="expanded" hasChildren="hasChild"></e-dropdowntree-fields>
-                    </ejs-dropdowntree>
-                    <ejs-dropdownlist id="entitiesDDL" popupHeight="200px" placeholder="Select an entity" change="entitiesDDLvalueChange" enabled="false">
-                        <e-dropdownlist-fields value="id" text="entityName"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
-                    <input id="newInstanceName2" class="form-control" disabled placeholder="" />
-                    <br />
-                    <ejs-grid id="InstanceGrid2" actionComplete="ValidateInput2">
-                        <e-grid-editSettings allowEditing="true"></e-grid-editSettings>
-                        <e-grid-columns>
-                            <e-grid-column field="propertyId" isPrimaryKey="true" headerText="Property" textAlign="Left" allowEditing="false" visible="false"></e-grid-column>
-                            <e-grid-column field="propertyName" headerText="Property" textAlign="Left" allowEditing="false"></e-grid-column>
-                            <e-grid-column field="value" headerText="Value"></e-grid-column>
-                        </e-grid-columns>
-                    </ejs-grid>
-                    <br />
-                    <p>
-                        <ejs-button id="saveExisting" content="SAVE" cssClass="controlbutton"></ejs-button>
-                    </p>
-                    <p>
-                        <ejs-button id="delete" cssClass="controlbutton danger" content="DELETE SELECTED INSTANCE"></ejs-button>
-                    </p>
-                </dt>
+                <dl>
+                    <dt class="col-sm-8">
+                        <input id="searchCustomers" class="form-control" placeholder="Search customers by any value" />
+                        <ejs-button id="search" content="Search" cssClass="controlbutton"></ejs-button>
+                        <br />
+                        <ejs-treegrid id="CustomersTreeGrid" idMapping="id" parentIdMapping="parentId" allowResizing="true"
+                                      treeColumnIndex="1" childMapping="true"
+                                      allowRowDragAndDrop="false" rowSelected="customerRowSelected" rowDeselected="customerRowDeselected"
+                                      allowPaging="true"
+                                      allowSorting="true"
+                                      allowFiltering="true"
+                                      allowExcelExport="true"
+                                      allowPdfExport="true"
+                                      toolbarClick="toolbarClick"
+                                      enableCollapseAll="false"
+                                      toolbar="@(new List<string>() { "Search","ExcelExport","PdfExport","ExpandAll","CollapseAll"})">
+                            <e-treegrid-pagesettings pageSizes="true" pageSize="20" pageSizeMode="Root">
+                            </e-treegrid-pagesettings>
+                            <e-treegrid-filterSettings type="Menu"></e-treegrid-filterSettings>
+                            <e-treegrid-searchsettings hierarchyMode="Both"></e-treegrid-searchsettings>
+                            <e-treegrid-filtersettings type="Menu" hierarchyMode="Both"></e-treegrid-filtersettings>
+                            <e-treegrid-sortsettings columns="cols"></e-treegrid-sortsettings>
+                            <e-treegrid-columns>
+                                <e-treegrid-column field="id" headerText="" textAlign="Left" width="0" visible="false"></e-treegrid-column>
+                                <e-treegrid-column field="classifiedName" headerText="Classification" textAlign="Left" width="100" clipMode="EllipsisWithTooltip"></e-treegrid-column>
+                                <e-treegrid-column field="property" headerText="Property" textAlign="Left" width="50" clipMode="EllipsisWithTooltip"></e-treegrid-column>
+                                <e-treegrid-column field="value" headerText="Value" textAlign="Left" width="90" clipMode="EllipsisWithTooltip"></e-treegrid-column>
+                                <e-treegrid-column field="instanceId" headerText="instanceId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
+                                <e-treegrid-column field="entityId" headerText="entityId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
+                                <e-treegrid-column field="entityName" headerText="entityName" textAlign="Left" width="95" visible="false"></e-treegrid-column>
+                                <e-treegrid-column field="categoryId" headerText="categoryId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
+                                <e-treegrid-column field="customerId" headerText="customerId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
+                                <e-treegrid-column field="valueId" headerText="valueId" textAlign="Left" width="95" visible="false"></e-treegrid-column>
+                                <e-treegrid-column field="primaryPropertyValue" headerText="primaryPropertyValue" textAlign="Left" width="95" visible="false"></e-treegrid-column>
+                            </e-treegrid-columns>
+                        </ejs-treegrid>
+                    </dt>
+                    <dt class="col-sm-4">
+                        <p id="selectedCustomerNotification">Please select a customer</p>
+                        <ejs-dropdowntree id="categoriesTDDL" enabled="false" popupHeight="200px" placeholder="Select a category" change="categoriesTDDLvalueChange" changeOnBlur="false">
+                            <e-dropdowntree-fields dataSource="ViewBag.categoriesDataSource" value="id" parentValue="parentId" text="categoryName" expanded="expanded" hasChildren="hasChild"></e-dropdowntree-fields>
+                        </ejs-dropdowntree>
+                        <ejs-dropdownlist id="entitiesDDL" popupHeight="200px" placeholder="Select an entity" change="entitiesDDLvalueChange" enabled="false">
+                            <e-dropdownlist-fields value="id" text="entityName"></e-dropdownlist-fields>
+                        </ejs-dropdownlist>
+                        <input id="newInstanceName2" class="form-control" disabled placeholder="" />
+                        <br />
+                        <ejs-grid id="InstanceGrid2" actionComplete="ValidateInput2">
+                            <e-grid-editSettings allowEditing="true"></e-grid-editSettings>
+                            <e-grid-columns>
+                                <e-grid-column field="propertyId" isPrimaryKey="true" headerText="Property" textAlign="Left" allowEditing="false" visible="false"></e-grid-column>
+                                <e-grid-column field="propertyName" headerText="Property" textAlign="Left" allowEditing="false"></e-grid-column>
+                                <e-grid-column field="value" headerText="Value"></e-grid-column>
+                            </e-grid-columns>
+                        </ejs-grid>
+                        <br />
+                        <p>
+                            <ejs-button id="saveExisting" content="SAVE" cssClass="controlbutton"></ejs-button>
+                        </p>
+                        <p>
+                            <ejs-button id="delete" cssClass="controlbutton danger" content="DELETE SELECTED INSTANCE"></ejs-button>
+                        </p>
+                    </dt>
+                </dl>
+             
 
             </div>
         </div>
