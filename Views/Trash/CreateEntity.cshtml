@@ -24,6 +24,8 @@
             <div class="form-group">
                 <label asp-for="EntityCategoryId" class="control-label">
                     @Html.DisplayNameFor(m => m.EntityCategoryId)
+                    <input class="form-control" hidden />
+
                     <ejs-dropdownlist id="EntityCategoryId" dataSource="@ViewBag.Categories" placeholder="Select an Entity Category">
                         <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
                     </ejs-dropdownlist>

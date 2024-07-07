@@ -174,10 +174,25 @@
                 <dt class="col-sm-4">
                     <div id="addNewData" style="display:none">
                         <p>
-                            <label>Existing Customer </label>
-                            <ejs-switch id="existingCustomer" checked="false" change="existingCustomerChanged"></ejs-switch>
-                            <label>Existing Instance </label>
-                            <ejs-switch id="existingInstance" checked="false" disabled="true" change="existingInstanceChanged"></ejs-switch>
+                            
+                            <label  class="control-label">
+                                Existing Customer
+                                <input class="form-control" hidden />
+
+                                <ejs-switch id="existingCustomer" checked="false" change="existingCustomerChanged"></ejs-switch>
+
+                            </label>
+
+
+                            <label class="control-label">
+                                Existing Instance
+                                <input class="form-control" hidden />
+
+                                <ejs-switch id="existingInstance" checked="false" disabled="true" change="existingInstanceChanged"></ejs-switch>
+
+                            </label>
+
+
                         </p>
 
                         <h6 id="Instructions">.</h6>
