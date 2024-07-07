@@ -36,8 +36,13 @@
                 <div class="col-md-6">
                     <form Id="send-code" method="post">
                         <div class="form-group">
-                            <label asp-for="Input.Code" class="control-label">Verification Code</label>
-                            <input asp-for="Input.Code" class="form-control" autocomplete="off" />
+
+                            <label asp-for="Input.Code" class="control-label">
+                                @Html.DisplayNameFor(m => m.Input.Code)
+
+                                <input asp-for="Input.Code" class="form-control" />
+                            </label>
+
                             <span asp-valIdation-for="Input.Code" class="text-danger"></span>
                         </div>
                         <button type="submit" class="btn btn-primary">Verify</button>

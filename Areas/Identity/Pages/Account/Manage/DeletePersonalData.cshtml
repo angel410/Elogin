@@ -19,8 +19,12 @@
         @if (Model.RequirePassword)
         {
             <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
+              
+                <label asp-for="Input.Password" class="control-label">
+                    @Html.DisplayNameFor(m => m.Input.Password)
+
+                    <input asp-for="Input.Password" class="form-control" />
+                </label>
                 <span asp-valIdation-for="Input.Password" class="text-danger"></span>
             </div>
         }

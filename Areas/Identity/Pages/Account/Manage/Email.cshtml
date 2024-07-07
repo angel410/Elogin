@@ -29,8 +29,13 @@
                 }
             </div>
             <div class="form-group">
-                <label asp-for="Input.NewEmail"></label>
-                <input asp-for="Input.NewEmail" class="form-control" />
+                <label asp-for="Input.NewEmail" class="control-label">
+                    @Html.DisplayNameFor(m => m.Input.NewEmail)
+
+                    <input asp-for="Input.NewEmail" class="form-control" />
+                </label>
+
+
                 <span asp-valIdation-for="Input.NewEmail" class="text-danger"></span>
             </div>
             <button Id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="btn btn-primary">Change email</button>
