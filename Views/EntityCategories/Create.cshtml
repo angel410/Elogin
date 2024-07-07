@@ -24,16 +24,13 @@
                 <span asp-valIdation-for="CategoryName" class="text-danger"></span>
             </div>
             <div class="form-group">
-
                 <label asp-for="ParentEntityCategoryId" class="control-label">
                     @Html.DisplayNameFor(m => m.ParentEntityCategoryId)
-                    <ejs-dropdownlist id="ParentEntityCategoryId" class="form-control" dataSource="@ViewBag.Categories" placeholder="Select an Entity Category">
-                        <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
-                    </ejs-dropdownlist>
-                    
                 </label>
-               
-                <span asp-valIdation-for="ParentEntityCategoryId" class="text-danger"></span>
+                <ejs-dropdownlist id="ParentEntityCategoryId" dataSource="@ViewBag.Categories" placeholder="Select an Entity Category">
+                    <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
+                </ejs-dropdownlist>
+                <span asp-validation-for="ParentEntityCategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
