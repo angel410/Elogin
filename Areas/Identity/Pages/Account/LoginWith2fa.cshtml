@@ -13,8 +13,12 @@
             <input asp-for="RememberMe" type="hidden" />
             <div asp-valIdation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Input.TwoFactorCode"></label>
-                <input asp-for="Input.TwoFactorCode" class="form-control" autocomplete="off" />
+                <label asp-for="Input.TwoFactorCode" class="control-label">
+                    @Html.DisplayNameFor(m => m.Input.TwoFactorCode)
+
+                    <input asp-for="Input.TwoFactorCode" class="form-control" />
+                </label>
+
                 <span asp-valIdation-for="Input.TwoFactorCode" class="text-danger"></span>
             </div>
             <div class="form-group">
