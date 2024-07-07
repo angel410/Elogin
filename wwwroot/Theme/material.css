@@ -19784,8 +19784,7 @@ textarea.e-input::-webkit-input-placeholder {
 .e-outline.e-input-group.e-disabled:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left):not(.e-input-focus),
 .e-outline.e-input-group.e-control-wrapper.e-disabled:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left):not(.e-input-focus),
 .e-outline.e-input-group.e-disabled.e-float-icon-left:not(.e-input-focus),
-.e-outline.e-input-group.e-disabled.e-control-wrapper.e-float-icon-left:not(.e-input-focus) {
-  border-color: rgba(0, 0, 0, 0.06); }
+
 
 .e-outline.e-float-input.e-success.e-input-focus input:focus ~ label.e-float-text,
 .e-outline.e-float-input.e-input-group.e-success.e-valid-input label.e-float-text.e-label-top,
@@ -21463,7 +21462,6 @@ textarea.e-filled.e-disabled.e-input::-webkit-input-placeholder {
 .e-small .e-filled.e-float-input.e-warning.e-input-focus input ~ label.e-float-text,
 .e-filled.e-float-input.e-small.e-bigger.e-warning.e-input-focus input ~ label.e-float-text,
 .e-bigger .e-filled.e-float-input.e-small.e-warning.e-input-focus input ~ label.e-float-text,
-.e-filled.e-float-input.e-control-wrapper.e-warning.e-input-focus inputs ~ label.e-float-text,
 .e-filled.e-float-input.e-control-wrapper.e-bigger.e-warning.e-input-focus input ~ label.e-float-text,
 .e-bigger .e-filled.e-float-input.e-control-wrapper.e-warning.e-input-focus input ~ label.e-float-text,
 .e-filled.e-float-input.e-control-wrapper.e-small.e-warning.e-input-focus input ~ label.e-float-text,
@@ -21883,7 +21881,6 @@ textarea.e-filled.e-disabled.e-input::-webkit-input-placeholder {
       position: absolute;
       width: 2px; }
   .e-control-wrapper.e-slider-container .e-range {
-    border-radius: 2px;
     position: absolute;
     transition: left 300ms ease-out, right 300ms ease-out, bottom 300ms ease-out, width 300ms ease-out,
  height 300ms ease-out; }
