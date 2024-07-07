@@ -15,17 +15,22 @@
             <div asp-valIdation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="CategoryName" class="control-label"></label>
-                <input asp-for="CategoryName" class="form-control" />
+
+                <label asp-for="CategoryName" class="control-label">
+                    @Html.DisplayNameFor(m => m.CategoryName)
+
+                    <input asp-for="CategoryName" class="form-control" />
+                </label>
                 <span asp-valIdation-for="CategoryName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ParentEntityCategoryId" class="control-label"></label>
-                @*<input asp-for="ParentEntityCategoryId" class="form-control" />*@
-                @*<select asp-for="ParentEntityCategoryId" asp-items="@ViewData["Categories"] as List<SelectListItem>"></select>*@
-                <ejs-dropdownlist id="ParentEntityCategoryId" dataSource="@ViewBag.Categories" placeholder="Select an Entity Category" value="@Model.ParentEntityCategoryId">
-                    <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
-                </ejs-dropdownlist>
+                <label asp-for="ParentEntityCategoryId" class="control-label">
+                    @Html.DisplayNameFor(m => m.ParentEntityCategoryId)
+                    <ejs-dropdownlist id="ParentEntityCategoryId" dataSource="@ViewBag.Categories" placeholder="Select an Entity Category" value="@Model.ParentEntityCategoryId">
+                        <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
+                    </ejs-dropdownlist>
+
+                </label>
                 <span asp-valIdation-for="ParentEntityCategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">

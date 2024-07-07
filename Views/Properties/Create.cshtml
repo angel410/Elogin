@@ -14,18 +14,31 @@
         <form asp-action="Create">
             <div asp-valIdation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <label asp-for="Name" class="control-label">
+                    @Html.DisplayNameFor(m => m.Name)
+                    <input asp-for="Name" class="form-control" />
+
+
+                </label>
                 <span asp-valIdation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ValidationRegex" class="control-label"></label>
-                <input asp-for="ValidationRegex" class="form-control" />
+
+                <label asp-for="ValidationRegex" class="control-label">
+                    @Html.DisplayNameFor(m => m.ValidationRegex)
+                    <input asp-for="ValidationRegex" class="form-control" />
+
+
+                </label>
                 <span asp-valIdation-for="ValidationRegex" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ValidationHint" class="control-label"></label>
-                <input asp-for="ValidationHint" class="form-control" />
+                <label asp-for="ValidationHint" class="control-label">
+                    @Html.DisplayNameFor(m => m.ValidationHint)
+                    <input asp-for="ValidationHint" class="form-control" />
+
+
+                </label>
                 <span asp-valIdation-for="ValidationHint" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
@@ -43,11 +56,7 @@
                     <input class="form-check-input" asp-for="IsUniqueIdentifier" /> @Html.DisplayNameFor(model => model.IsUniqueIdentifier)
                 </label>
             </div>
-            @*<div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
-            </div>*@
+           
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

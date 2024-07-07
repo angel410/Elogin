@@ -15,28 +15,61 @@
         <form asp-action="Create">
             <div asp-valIdation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CustomerName" class="control-label">Customer Name</label>
-                <input asp-for="CustomerName" readonly class="form-control" />
+
+                <label asp-for="CustomerName" class="control-label">
+                    @Html.DisplayNameFor(m => m.CustomerName)
+                    <input asp-for="CustomerName" class="form-control" />
+
+
+                </label>
+           
             </div>
             <div class="form-group">
-                <label asp-for="LicenseType" class="control-label">License Type</label>
-                <input asp-for="LicenseType" readonly class="form-control" />
+
+                <label asp-for="LicenseType" class="control-label">
+                    @Html.DisplayNameFor(m => m.LicenseType)
+                    <input asp-for="LicenseType" class="form-control" />
+
+
+                </label>
             </div>
             <div class="form-group" style="@(Model.LicenseType!="Perpetual" ? "display:block" : "display:none")">
-                <label asp-for="ExpiryDate" class="control-label">License Expiration Date</label>
-                <input asp-for="ExpiryDate" readonly class="form-control" />
+             
+                <label asp-for="ExpiryDate" class="control-label">
+                    @Html.DisplayNameFor(m => m.ExpiryDate)
+                    <input asp-for="ExpiryDate" class="form-control" />
+
+
+                </label>
             </div>
             <div class="form-group">
-                <label asp-for="MaxChannels" class="control-label">Identification Channels</label>
-                <input asp-for="MaxChannels" readonly class="form-control" />
+              
+                <label asp-for="MaxChannels" class="control-label">
+                    @Html.DisplayNameFor(m => m.MaxChannels)
+                    <input asp-for="MaxChannels" class="form-control" />
+
+
+                </label>
+
             </div>
             <div class="form-group">
-                <label asp-for="MaxUsers" class="control-label">Local eLogin Users</label>
-                <input asp-for="MaxUsers" readonly class="form-control" />
+
+                <label asp-for="MaxUsers" class="control-label">
+                    @Html.DisplayNameFor(m => m.MaxUsers)
+                    <input asp-for="MaxUsers" class="form-control" />
+
+
+                </label>
+
             </div>
             <div class="form-group">
-                <label asp-for="CustomerRepository" class="control-label">Customer Repository</label>
-                <input asp-for="CustomerRepository" readonly class="form-control" disabled/>
+                <label asp-for="CustomerRepository" class="control-label">
+                    @Html.DisplayNameFor(m => m.CustomerRepository)
+                    <input asp-for="CustomerRepository" class="form-control" />
+
+
+                </label>
+         
             </div>
         </form>
     </div>

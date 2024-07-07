@@ -15,13 +15,21 @@
             <div asp-valIdation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="SettingName" class="control-label"></label>
-                <input asp-for="SettingName" class="form-control" />
+                <label asp-for="SettingName" class="control-label">
+                    @Html.DisplayNameFor(m => m.SettingName)
+                    <input asp-for="SettingName" class="form-control" />
+
+
+                </label>
                 <span asp-valIdation-for="SettingName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Value" class="control-label"></label>
-                <input asp-for="Value" class="form-control" />
+                <label asp-for="Value" class="control-label">
+                    @Html.DisplayNameFor(m => m.Value)
+                    <input asp-for="Value" class="form-control" />
+
+
+                </label>
                 <span asp-valIdation-for="Value" class="text-danger"></span>
             </div>
             <div class="form-group">

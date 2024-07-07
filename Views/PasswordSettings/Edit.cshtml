@@ -14,13 +14,23 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="PasswordExpirationDays" class="control-label"></label>
-                <input asp-for="PasswordExpirationDays" class="form-control" />
+
+                <label asp-for="PasswordExpirationDays" class="control-label">
+                    @Html.DisplayNameFor(m => m.PasswordExpirationDays)
+                    <input asp-for="PasswordExpirationDays" class="form-control" />
+
+
+                </label>
                 <span asp-validation-for="PasswordExpirationDays" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PasswordHistoryLimit" class="control-label"></label>
-                <input asp-for="PasswordHistoryLimit" class="form-control" />
+
+                <label asp-for="PasswordHistoryLimit" class="control-label">
+                    @Html.DisplayNameFor(m => m.PasswordHistoryLimit)
+                    <input asp-for="PasswordHistoryLimit" class="form-control" />
+
+
+                </label>
                 <span asp-validation-for="PasswordHistoryLimit" class="text-danger"></span>
             </div>
             <div class="form-group">
