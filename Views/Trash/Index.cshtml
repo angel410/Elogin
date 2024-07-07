@@ -23,11 +23,7 @@
     </div>
     <div class="e-content">
         <div>
-            <h6 id="CategoriesHeader"></h6>
-            <p>
-                @*<ejs-button id="PerformanceTest" content="Performance Test"></ejs-button>*@
-                
-            </p>
+           
             <ejs-treegrid id="CategoriesTreeGrid" dataSource="@ViewBag.entityCategoriesDataSource" height="480" idMapping="id" parentIdMapping="parentEntityCategoryId"
                           treeColumnIndex="1" childMapping="true" rowSelected="CategoryRowSelected" rowDeselected="CategoryRowDeselected" allowFiltering="true"
                           allowRowDragAndDrop="true" actionComplete="CategoriesActionComplete"

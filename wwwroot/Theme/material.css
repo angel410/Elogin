@@ -933,8 +933,8 @@
       margin-left: 0;
       margin-right: -1em; }
 
-/*! button theme */
-.e-btn,
+
+
 .e-css.e-btn {
   -webkit-tap-highlight-color: transparent;
   background-color: #fafafa;
@@ -970,7 +970,7 @@
     border-color: transparent;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
     color: rgba(0, 0, 0, 0.87); }
-  .e-btn:disabled,
+ 
   .e-css.e-btn:disabled {
     background-color: rgba(0, 0, 0, 0.12);
     border-color: transparent;
@@ -979,7 +979,6 @@
   .e-btn .e-ripple-element,
   .e-css.e-btn .e-ripple-element {
     background-color: rgba(0, 0, 0, 0.24); }
-  .e-btn.e-round,
   .e-css.e-btn.e-round {
     background-color: #fafafa;
     border-color: transparent;
@@ -1203,7 +1202,6 @@
     .e-btn.e-danger .e-ripple-element,
     .e-css.e-btn.e-danger .e-ripple-element {
       background-color: rgba(255, 255, 255, 0.24); }
-  .e-btn.e-flat,
   .e-css.e-btn.e-flat {
     background-color: transparent;
     border-color: transparent;
@@ -1760,14 +1758,7 @@
     margin-right: 16px;
     padding: 6px; }
 
-.e-pager {
-  border-style: solid;
-  border-width: 1px;
-  display: inline-block;
-  font-size: 13px;
-  padding: 0;
-  white-space: normal;
-  width: 100%; }
+
   .e-pager [class^='e-'] {
     box-sizing: border-box; }
   .e-pager div.e-parentmsgbar {
@@ -1890,7 +1881,7 @@
     text-indent: -3px; }
   .e-pager .e-mnext {
     text-indent: -2px; }
-  .e-pager .e-mfirst,
+
   .e-pager .e-mprev,
   .e-pager .e-mnext,
   .e-pager .e-mlast {
