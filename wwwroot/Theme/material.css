@@ -12126,7 +12126,6 @@ textarea.e-small.e-input::-moz-placeholder {
 .e-small textarea.e-bigger.e-input::-webkit-input-placeholder,
 .e-bigger textarea.e-small.e-input:-moz-placeholder,
 .e-small textarea.e-bigger.e-input:-moz-placeholder,
-.e-bigger intextareaput.e-small.e-input:-ms-input-placeholder,
 .e-small textarea.e-bigger.e-input:-ms-input-placeholder,
 .e-bigger textarea.e-small.e-input::-moz-placeholder,
 .e-small textarea.e-bigger.e-input::-moz-placeholder {
@@ -21886,7 +21885,8 @@ textarea.e-filled.e-disabled.e-input::-webkit-input-placeholder {
   .e-control-wrapper.e-slider-container .e-range {
     border-radius: 2px;
     position: absolute;
-    transition: left 300ms ease-out, right 300ms ease-out, bottom 300ms ease-out, width 300ms ease-out, height 300ms ease-out; }
+    transition: left 300ms ease-out, right 300ms ease-out, bottom 300ms ease-out, width 300ms ease-out,
+ height 300ms ease-out; }
     .e-control-wrapper.e-slider-container .e-range.e-drag-horizontal {
       cursor: ew-resize; }
     .e-control-wrapper.e-slider-container .e-range.e-drag-vertical {
