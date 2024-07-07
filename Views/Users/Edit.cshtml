@@ -21,9 +21,9 @@
                 </label>
             <span asp-validation-for="EmailAddress" class="text-danger"></span>
         </div>
-       
-        <div class="form-group" hidden>
-                <div class="form-group">
+
+
+            <div class="form-group" hidden>
                 <label asp-for="SecurityStamp" class="control-label" hidden>
                     @Html.DisplayNameFor(m => m.SecurityStamp)
                     <input asp-for="SecurityStamp" class="form-control" hidden readonly />
@@ -36,6 +36,8 @@
 
                     <label asp-for="Roles" class="control-label" hidden>
                         @Html.DisplayNameFor(m => m.Roles)
+                        <input class="form-control" hidden />
+
                         <ejs-multiselect id="default" ejs-for="Roles" dataSource="@ViewData["Roles"]" placeholder="Select Roles" mode="Default"></ejs-multiselect>
                     </label>
              

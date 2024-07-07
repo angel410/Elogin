@@ -38,6 +38,8 @@
             <div class="form-group">
                 <label asp-for="DefaultIdentifierEntityId" class="control-label">
                     @Html.DisplayNameFor(m => m.DefaultIdentifierEntityId)
+                    <input class="form-control" hidden />
+
                     <ejs-dropdownlist id="DefaultIdentifierEntityId" showClearButton="true" dataSource="@ViewBag.Entities" placeholder="Select an Entity" change="entityChange">
                         <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
                     </ejs-dropdownlist>
@@ -49,6 +51,8 @@
             <div class="form-group">
                 <label asp-for="DefaultIdentifierPropertyId" class="control-label">
                     @Html.DisplayNameFor(m => m.DefaultIdentifierPropertyId)
+                    <input class="form-control" hidden />
+
                     <ejs-dropdownlist id="DefaultIdentifierPropertyId" showClearButton="true" dataSource="@ViewBag.Properties" placeholder="Select a Property" enabled="false">
                         <e-dropdownlist-fields text="PropertyName" value="PropertyId"></e-dropdownlist-fields>
                     </ejs-dropdownlist>

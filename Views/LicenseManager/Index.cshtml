@@ -65,8 +65,13 @@
             </div>
            
             <div class="form-group">
-                <label asp-for="CustomerRepository" class="control-label">Customer Repository</label>
-                <input type="text" asp-for="CustomerRepository" value=@(Model.CustomerRepository? "Yes" : "No") readonly class="form-control" disabled />
+                <label asp-for="CustomerRepository" class="control-label">
+                    @Html.DisplayNameFor(m => m.CustomerRepository)
+                    <input type="text" asp-for="CustomerRepository" value=@(Model.CustomerRepository? "Yes" : "No") readonly class="form-control" disabled />
+
+
+                </label>
+              
             </div>
         </form>
     </div>

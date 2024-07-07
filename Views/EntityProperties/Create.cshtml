@@ -17,6 +17,8 @@
 
                 <label asp-for="EntityId" class="control-label">
                     @Html.DisplayNameFor(m => m.EntityId)
+                    <input class="form-control" hidden />
+
                     <ejs-dropdownlist id="EntityId" dataSource="@ViewBag.Entities" placeholder="Select an Entity">
                         <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
                     </ejs-dropdownlist>
@@ -28,6 +30,8 @@
             <div class="form-group">
                 <label asp-for="PropertyId" class="control-label">
                     @Html.DisplayNameFor(m => m.PropertyId)
+                    <input class="form-control" hidden />
+
                     <ejs-dropdownlist id="PropertyId" dataSource="@ViewBag.Properties" placeholder="Select a Property">
                         <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
                     </ejs-dropdownlist>
