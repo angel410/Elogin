@@ -27,7 +27,7 @@
 
                 <label asp-for="ParentEntityCategoryId" class="control-label">
                     @Html.DisplayNameFor(m => m.ParentEntityCategoryId)
-                    <ejs-dropdownlist id="ParentEntityCategoryId" dataSource="@ViewBag.Categories" placeholder="Select an Entity Category">
+                    <ejs-dropdownlist id="ParentEntityCategoryId" class="form-control" dataSource="@ViewBag.Categories" placeholder="Select an Entity Category">
                         <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
                     </ejs-dropdownlist>
                     
